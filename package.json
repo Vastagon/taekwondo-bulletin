@@ -15,6 +15,7 @@
     "express": "^4.17.3",
     "mongoose": "^6.2.4",
     "nodemon": "^2.0.15",
+    "path": "^0.12.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^6.2.2",
@@ -25,16 +26,19 @@
     "node": "14.17.6"
   },
   "scripts": {
-    "client": "webpack-dev-server --mode development --devtool inline-source-map --hot",
-    "server": "nodemon src/server/index.js",
-    "dev": "concurrently \"npm run server\" \"npm start\"",
+    "devStart": "react-scripts start",
+    "heroku-postbuild": "npm run build",
     "preDeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "start": "PORT=3006 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "buildncopy": "npm run build && (cp -r build ../backend/)"
+    "buildncopy": "npm run build && (cp -r build ../backend/)",
+    "client-install": "npm install --prefix client",
+    "start": "node index.js",
+    "server": "nodemon index.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "eslintConfig": {
     "extends": [
@@ -55,7 +59,6 @@
     ]
   },
   "devDependencies": {
-    
     "gh-pages": "^3.2.3"
   },
   "main": "index.js",
