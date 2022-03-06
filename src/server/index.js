@@ -27,5 +27,5 @@ app.use('/users', usersRouter)
 app.use("/blogposts", blogpostsRouter)
 
 app.listen(port, () =>{
-    console.log("The server is running properly")
+    console.log(`The server is running on port ${port}`)
 })
