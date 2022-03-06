@@ -1,1 +1,3 @@
 npm run client
+
+web: nodemon ./src/server/index.js

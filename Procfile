@@ -1,1 +1,1 @@
-web: nodemon ./src/server/index.js
+web: npm run dev
