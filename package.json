@@ -34,7 +34,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "buildncopy": "npm run build && (cp -r build ../backend/)"
+    "buildncopy": "npm run build && (cp -r build ../backend/)",
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
   },
   "eslintConfig": {
     "extends": [
