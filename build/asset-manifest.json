@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/tkd-bulletin/static/css/main.24ec88a1.css",
+    "main.js": "/tkd-bulletin/static/js/main.67d5e7ef.js",
+    "static/media/overlap.png": "/tkd-bulletin/static/media/overlap.5de27eda9ded3175eed4.png",
+    "index.html": "/tkd-bulletin/index.html",
+    "main.24ec88a1.css.map": "/tkd-bulletin/static/css/main.24ec88a1.css.map",
+    "main.67d5e7ef.js.map": "/tkd-bulletin/static/js/main.67d5e7ef.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.24ec88a1.css",
+    "static/js/main.67d5e7ef.js"
+  ]
+}
