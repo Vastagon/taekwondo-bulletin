@@ -35,8 +35,8 @@
     "eject": "react-scripts eject",
     "buildncopy": "npm run build && (cp -r build ../backend/)",
     "client-install": "npm install --prefix client",
-    "start": "node index.js",
-    "server": "nodemon index.js",
+    "start": "node ./src/server/index.js",
+    "server": "nodemon ./src/server/index.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
