@@ -27,7 +27,7 @@
   },
   "scripts": {
     "devStart": "react-scripts start",
-    "heroku-postbuild": "npm run build",
+    "heroku-postbuild": "cd client && npm install && npm run build",
     "preDeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "build": "react-scripts build",
@@ -37,7 +37,7 @@
     "client-install": "npm install --prefix client",
     "server": "nodemon ./src/server/index.js",
     "client": "npm start --prefix client",
-    "start": "serve -s build",
+    "start": "nodemon ./src/server/index.js",
     "dev": "concurrently \"npm run server\" \"npm start\""
   },
   "eslintConfig": {
