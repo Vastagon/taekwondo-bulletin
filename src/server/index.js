@@ -20,9 +20,9 @@ connection.once('open', () =>{///once connection is open
     console.log("Mongo Connected")
 })
 
-app.get("/", (req,res) =>{
-    res.send("Hello")
-})
+// app.get("/", (req,res) =>{
+//     res.send('index.html')
+// })
 
 const exercisesRouter = require('./routes/exercises')
 const usersRouter = require('./routes/users')
