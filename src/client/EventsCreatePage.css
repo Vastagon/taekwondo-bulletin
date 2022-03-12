@@ -1,0 +1,53 @@
+.create-events-form{
+    position: relative;
+    margin-top: 15vh;
+    display: block;
+    flex-direction: column;
+    background-color: aquamarine;
+    width: 50%;
+    margin-left: 25%;
+    padding-bottom: 2rem;
+
+}
+.create-events-input{
+    display: block;
+    margin-top: 5%;
+    padding: 10px 5px;
+    margin-left: 15%;
+}
+.img-drop{
+    width: 20vh;
+    height: 20vh;
+    margin-left: 10%;
+    background-color: white;
+    border-width: 1px;
+    border-color: gray;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-style: solid;
+    text-align: center;
+}
+.form-bottom-row{
+    display: flex;
+    margin-top: 10%;
+
+}
+.events-form-submit{
+    width: 30%;
+    margin-left: 30%;
+    height: 5vh;
+    margin-top: 15%;
+}
+.image-preview{
+    width: 20vh;
+    height: 20vh;
+}
+.date-picker{
+    margin-left: 35%;
+    margin-top: 5%;
+}
+.form-label{
+    margin-left: 0%
+}

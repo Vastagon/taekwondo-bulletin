@@ -1,4 +1,15 @@
+import axios from "axios"
+import {useState, useEffect} from "react"
+
 export default function EventCard(props){
+    const [eventCardInfo, setEventCardInfo] = useState({eventName: "",eventDescription: "",eventTime: ""})
+
+    useEffect(() =>{
+        axios.get("http://localhost:5000/eventsinfo")
+        .then(res => setEventCardInfo(res))
+    }, [])
+
+    console.log(eventCardInfo.data)
     return(
         <div className="event-card">
             <img className="event-picture" src={props.item.img} />
@@ -9,3 +20,5 @@ export default function EventCard(props){
         </div>
     )
 }
+
+///eventCardInfo.data[0]?.eventName

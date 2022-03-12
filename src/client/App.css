@@ -199,6 +199,12 @@ html,body{
 .signup-page-message{
   margin-left: 2rem;
 }
+.new-event-button{
+  position: relative;
+  margin-top: 10vh;
+  margin-left: 90vw;
+  right: 0;
+}
 
 @media screen and (max-width: 500px) {
   .navbar{

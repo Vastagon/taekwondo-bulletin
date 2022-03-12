@@ -1,20 +1,43 @@
 import Navbar from "./Navbar"
+import axios from 'axios';
+import {useState} from "react"
 
 export default function Signup(){
+    let [userInfo, setUserInfo] = useState({username:"", password:"", email:""})
+
+    function submitSignup(e){
+        e.preventDefault()
+        if(document.getElementById('password').value !== document.getElementById('repeat-password').value){
+            alert("Passwords don't match")
+        }else{
+            axios.post("http://localhost:5000/users/add", userInfo)
+            .then(res => console.log(res.data))
+            window.location.reload()
+        }
+    }
+    function onChange(e){
+        setUserInfo(prev =>({
+            ...prev,
+            [e.target.name]: e.target.value
+        }))
+    }
+
     return(
         <div className="centered">
             <Navbar />
             <div className="signup-page">
                 <h1 className="signup-page-message">Welcome to Taekwondo Bulletin</h1>
-                <form>
+                <form onSubmit={submitSignup}>
                     <p className="signup-page-titles">Email</p>
-                    <input className="signup-page-inputs" placeholder="Email"></input>
+                    <input onChange={onChange} name="email" required className="signup-page-inputs" placeholder="Email"></input>
                     <p className="signup-page-titles">Username</p>
-                    <input className="signup-page-inputs" placeholder="Username"></input>
+                    <input onChange={onChange} name="username" required className="signup-page-inputs" placeholder="Username"></input>
                     <p className="signup-page-titles">Password</p>
-                    <input className="signup-page-inputs" placeholder="Password"></input>
+                    <input onChange={onChange} name="password" id="password" required className="signup-page-inputs" placeholder="Password"></input>
                     <p className="signup-page-titles">Repeat Password</p>
-                    <input className="signup-page-inputs" placeholder="Repeat Password"></input>
+                    <input id="repeat-password" required className="signup-page-inputs" placeholder="Repeat Password"></input>
+                    <br></br>
+                    <button>Sign up</button>
                 </form>
             </div>
         </div>

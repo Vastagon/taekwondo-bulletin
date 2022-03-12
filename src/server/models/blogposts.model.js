@@ -2,7 +2,9 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const BlogPostSchema = new Schema({
-    postContent: {type: String}
+    postContent: {type: String},
+    postTitle: {type: String},
+    username: {type: String}
 }, {
     timestamps: true,
 })
