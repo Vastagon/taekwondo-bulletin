@@ -5,94 +5,90 @@ import {useState, useEffect} from "react"
 import {useDropzone} from "react-dropzone"
 import axios from "axios"
 import DatePicker from "react-datepicker"
-import {v4 as uuid} from "uuid"
 
 
 export default function EventsCreatePage(){
-    // const [eventFormInfo, setEventFormInfo] = useState({eventName:"",eventDescription:"",eventTime:"",eventDate:"",eventSlots:0, eventImage:[]})
-    const [eventFormInfo, setEventFormInfo] = useState({eventName:"",eventDescription:"",eventTime:"",eventDate:new Date(), eventSlots:0, id:""})
-    const [startDate, setStartDate] = useState(new Date())
+    const [eventFormInfo, setEventFormInfo] = useState({eventName:"",eventDescription:"",eventTime:"",eventDate:new Date(), 
+    eventSlots:0, eventImg:Math.random(0,20)+ new Date()})
+    
     let formData = new FormData()
-    const [droppedImage, setDroppedImage] = useState(false)
+    const [droppedImage, setDroppedImage] = useState(true)
     const [testImage, setTestImage] = useState({image: ""})
+
     formData.append("api_key", "336683864383724")
     formData.append("file", testImage.image)
-    formData.append("public_id", Math.random(0,2).toString())
-    formData.append("timestamp", + new Date())
-    formData.append("upload_preset", "zi4rfynp")
+    formData.append("upload_preset", "zi4rfynp") 
+    formData.append("public_id", eventFormInfo.eventImg)
+
     const {getRootProps, getInputProps} = useDropzone({
         accept: "image/*",
         onDrop: (acceptedFiles) => {
             const reader = new FileReader()
             const imageResult = acceptedFiles[0]
+            setDroppedImage(true)
+            formData.append("file", testImage.image)
+
             reader.onload = () =>{
                 setTestImage({image: reader.result})
             }
             reader.readAsDataURL(imageResult)
-            
-            // reader.onload = () =>{
-            //     setEventFormInfo((prevInfo) =>({
-            //         ...prevInfo,
-            //         eventImage: reader.result
-            //     }))
-            // }
-            // reader.readAsDataURL(imageResult)
-
-            
-            // setEventFormInfo((prevInfo) =>({
-            //     ...prevInfo,
-            //     eventImage: acceptedFiles.map((file) => Object.assign(file, {
-            //         preview: URL.createObjectURL(file)
-            //     }))
-            // }))
         }
     })
 
     function uploadImage(){
-        ///https://api.cloudinary.com/v1_1/demo/image/upload
-        // console.log(files[0].preview)
-        // axios.post("cloudinary://336683864383724:8MbNKmImBmB1XfLn5v0PFnmYR6M@dg9s57jo8", testImage.image)
-        // axios.post("http://localhost:5000/addimage/add", testImage)        
-
         axios.post("https://api.cloudinary.com/v1_1/zi4rfynp/image/upload", formData)
-        .then(res => console.log(res))
     }
 
 
 ///Handles styling when an image is dropped
     useEffect(() =>{
         imageDropped()
-    }, [eventFormInfo.eventImage])
+    }, [eventFormInfo.eventImg])
     function imageDropped(){
-        setDroppedImage(prev => !prev)
-        if(droppedImage){
+
+        if(!droppedImage){
             document.getElementById('drag-file-text').style.display = "none"
         }else{
-            document.getElementById('drag-file-text').style.display = "relative"
+            document.getElementById('drag-file-text').style.display = "absolute"
         }
-        // console.log(droppedImage)
     }
     
     function createEventFormSubmit(e){
-        e.preventDefault()
+        e.preventDefault()        
+        uploadImage()
+
+        setEventFormInfo((prevInfo) => ({
+            ...prevInfo,
+            eventImg: formData?.data?.public_id
+        }))
 
         axios.post("http://localhost:5000/eventsinfo/add", eventFormInfo)
         .then(res => console.log(res.data))
+///Sets all values to zero and resets page
+        document.getElementById("eventName").value = ""
+        document.getElementById("eventDescription").value = ""
+        document.getElementById("eventSlots").value = ""
+        document.getElementById("eventTime").value = ""
+        setDroppedImage(false)
+        imageDropped()
 
-        uploadImage()
-        window.location.reload()
+        // window.location.reload()
     }
     function handleEventsFormChange(e){
 
         setEventFormInfo(prev =>({
             ...prev,
             [e.target.name]: e.target.value,
-            id: Math.random(0,5).toString()
         }))
-    }///+eventFormInfo.eventName.toString()
 
-    console.log(testImage)
-    console.log(eventFormInfo.id)
+        // console.log(Array.from(formData))
+    }
+
+
+    console.log(droppedImage)
+    // console.log(testImage.image)
+    console.log(eventFormInfo)
+    // console.log(formData)
     return(
         <div>
             <Navbar />
@@ -115,7 +111,10 @@ export default function EventsCreatePage(){
                 </div>
                 <div className="create-events-input">
                     <label className="form-label" htmlFor="date-picker">Event Date</label>
-                    <DatePicker id="date-picker" className="date-picker" selected={startDate} onChange={(date:Date) => setStartDate(date)} />
+                    <DatePicker id="date-picker" className="date-picker" selected={eventFormInfo.eventDate} onChange={(date) => setEventFormInfo(prevInfo => ({
+                        ...prevInfo,
+                        eventDate: date
+                    }))} />
                 </div>
                 
   
@@ -123,8 +122,8 @@ export default function EventsCreatePage(){
                 <div className="form-bottom-row">
                     <div className="img-drop">
                         <div {...getRootProps()}>
-                            <input {...getInputProps()} />
-                            {!droppedImage ? <img className="image-preview" src={testImage.image}></img> 
+                            <input id="dropbox-image" {...getInputProps()} />
+                            {droppedImage ? <img className="image-preview" src={testImage.image}></img> 
                             :
                             <svg id="img-drop-icon" className="img-drop-icon" xmlns="http://www.w3.org/2000/svg" width="50" height="43" viewBox="0 0 50 43">
                             <path d="M48.4 26.5c-.9 0-1.7.7-1.7 
@@ -138,7 +137,7 @@ export default function EventsCreatePage(){
                     </div>
                         <button className="events-form-submit" type="submit">Submit Event</button>
                 </div>
-                <p>{startDate.toUTCString()}</p>
+                <p>{eventFormInfo.eventDate.toUTCString()}</p>
             </form>      
             <div>    
             </div>

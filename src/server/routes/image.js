@@ -1,12 +1,12 @@
 const router = require('express').Router()
 let Image = require('../models/image.model')
-const cloudinary = require('cloudinary').v2
+// const cloudinary = require('cloudinary').v2
 
-cloudinary.config({ 
-    cloud_name: 'dg9s57jo8', 
-    api_key: '336683864383724', 
-    api_secret: '8MbNKmImBmB1XfLn5v0PFnmYR6M' 
-  });
+// cloudinary.config({ 
+//     cloud_name: 'dg9s57jo8', 
+//     api_key: '336683864383724', 
+//     api_secret: '8MbNKmImBmB1XfLn5v0PFnmYR6M' 
+//   });
 
 router.route('/').get((req,res) =>{
     Image.find()///Mongoose method that returns promise

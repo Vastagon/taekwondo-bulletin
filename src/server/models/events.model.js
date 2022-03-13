@@ -6,7 +6,7 @@ const BlogPostSchema = new Schema({
         eventDescription: {type: String, required:true},
         eventTime: {type: String, required:true},
         eventSlots: {type: Number},
-        eventImg: {data: Buffer, type: String}
+        eventImg: {type: String}
 }, {
     timestamps: true,
 })
