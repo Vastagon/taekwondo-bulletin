@@ -3,7 +3,9 @@ import axios from 'axios';
 import {useState} from "react"
 
 export default function Signup(){
-    let [userInfo, setUserInfo] = useState({username:"", password:"", email:""})
+    const [userInfo, setUserInfo] = useState({username:"", password:"", email:""})
+    const [documentTitle, setDocumentTitle] = useState("Signup")
+
 
     function submitSignup(e){
         e.preventDefault()
@@ -24,7 +26,7 @@ export default function Signup(){
 
     return(
         <div className="centered">
-            <Navbar />
+            <Navbar documentTitle={documentTitle}/>
             <div className="signup-page">
                 <h1 className="signup-page-message">Welcome to Taekwondo Bulletin</h1>
                 <form onSubmit={submitSignup}>
@@ -37,7 +39,7 @@ export default function Signup(){
                     <p className="signup-page-titles">Repeat Password</p>
                     <input id="repeat-password" required className="signup-page-inputs" placeholder="Repeat Password"></input>
                     <br></br>
-                    <button>Sign up</button>
+                    <button className="signup-page-button">Sign up</button>
                 </form>
             </div>
         </div>

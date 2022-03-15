@@ -1,6 +1,5 @@
 import {Image} from "cloudinary-react"
 
-
 export default function EventCard(props){
 
     return(
@@ -10,7 +9,10 @@ export default function EventCard(props){
             <p className="event-description">{props.item.eventDescription}</p>
             <p>{`Date: ${props.item.eventDate.toString()}`}</p>
             <p>{`Time: ${props.item.eventTime}`}</p>
-            <p>{`Slots Left: ${props.item.eventSlots}`}</p>
+            {props.item.eventSlots ? <p>{`Total Slots: ${props.item.eventSlots}`}</p>
+            :
+            <p>{`Total Slots: Unlimited`}</p>
+            }
         </div>
     )
 }

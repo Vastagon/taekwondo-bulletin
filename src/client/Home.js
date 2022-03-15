@@ -1,19 +1,15 @@
 import Navbar from "./components/Navbar";
-import data from "./components/data"
-import EventCard from './components/EventCard';
 import HomeSlider from "./components/HomeSlider";
-
 import "./App.css"
+import { useEffect ,useState } from "react";
 
 export default function Home(){
-
-
+    const [documentTitle, setDocumentTitle] = useState("Taekwondo Bulletin")
 
     return(
         <div>
-            <Navbar 
-                title = {"Events"}
-            />
+
+            <Navbar documentTitle={documentTitle}/>
             <HomeSlider />
             <h1>About</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 

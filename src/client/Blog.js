@@ -5,8 +5,9 @@ import axios from 'axios';
 
 
 export default function Blog() {
-    let [blogPost, setBlogPost] = useState({postContent:""})
-    let [showBlogPost, setShowBlogPost] = useState()
+    const [blogPost, setBlogPost] = useState({postContent:""})
+    const [showBlogPost, setShowBlogPost] = useState()
+    const [documentTitle, setDocumentTitle] = useState("Blog")
     
     useEffect(() =>{
       axios.get("http://localhost:5000/blogposts")
@@ -39,7 +40,7 @@ export default function Blog() {
 
       return(
           <div className="blog">
-              <Navbar />
+              <Navbar documentTitle={documentTitle} />
               <div className="all-blog-posts">
                 {writeBlogPostsToPage}
               </div>

@@ -14,6 +14,7 @@ export default function EventsCreatePage(){
     let formData = new FormData()
     const [droppedImage, setDroppedImage] = useState(true)
     const [testImage, setTestImage] = useState({image: ""})
+    const [documentTitle, setDocumentTitle] = useState("Create New Event")
 
     formData.append("api_key", "336683864383724")
     formData.append("file", testImage.image)
@@ -34,7 +35,7 @@ export default function EventsCreatePage(){
             reader.readAsDataURL(imageResult)
         }
     })
-
+///Uploads image to cloudinary
     function uploadImage(){
         axios.post("https://api.cloudinary.com/v1_1/zi4rfynp/image/upload", formData)
     }
@@ -52,7 +53,7 @@ export default function EventsCreatePage(){
             document.getElementById('drag-file-text').style.display = "absolute"
         }
     }
-    
+///Form submit handler
     function createEventFormSubmit(e){
         e.preventDefault()        
         uploadImage()
@@ -88,7 +89,7 @@ console.log(eventFormInfo)
 
     return(
         <div>
-            <Navbar />
+            <Navbar documentTitle={documentTitle} />
             <form onSubmit={createEventFormSubmit} className="create-events-form">
                 <div className="create-events-input">
                     <label className="form-label" htmlFor="eventName">Event Name</label>
@@ -96,7 +97,8 @@ console.log(eventFormInfo)
                 </div>
                 <div className="create-events-input">
                     <label className="form-label" htmlFor="eventDescription">Event Description</label>
-                    <input id="eventDescription" required onChange={handleEventsFormChange} name="eventDescription" className="event-description create-events-input" type="textarea" placeholder="Description" />
+                    <textarea id="eventDescription" required onChange={handleEventsFormChange} name="eventDescription" className="event-description create-events-input" type="textarea" placeholder="Description" ></textarea>
+                    {/* <input id="eventDescription" required onChange={handleEventsFormChange} name="eventDescription" className="event-description create-events-input" type="textarea" placeholder="Description" /> */}
                 </div>
                 <div className="create-events-input">
                     <label className="form-label" htmlFor="eventSlots">Total Slots</label>
@@ -113,7 +115,6 @@ console.log(eventFormInfo)
                         eventDate: date
                     }))} />
                 </div>
-                
   
 
                 <div className="form-bottom-row">
