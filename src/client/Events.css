@@ -1,0 +1,28 @@
+.event-image{
+    margin-left: 10%;
+    width: 80%;
+    height: 40%;
+}
+.event-card{
+    width: auto;
+    background-color: brown;
+    margin: 2rem;
+    margin-top: 15vh;
+    padding: 1rem;
+}
+.event-list{
+display: grid;
+grid-template-columns: 33% 33% auto;
+}
+.event-name{
+    text-align: center;
+}
+.event-description{
+    margin-top: 1.5rem;
+}
+
+@media screen and (max-width: 850px) {
+    .event-list{
+        grid-template-columns: auto;
+        }
+}

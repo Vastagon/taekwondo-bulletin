@@ -2,13 +2,12 @@ import EventCard from "./EventCard"
 import {v4 as uuid} from "uuid"
 import Navbar from "./Navbar"
 import axios from "axios"
-import {useState, useEffect, Component} from "react"
+import {useState, useEffect} from "react"
 import { useNavigate } from "react-router-dom"
+import "../Events.css"
 
 export default function Events(){
-    const [cloudImage, setCloudImage] = useState()
     const [eventCardInfo, setEventCardInfo] = useState()
-
 
 ///Gets data for events and sets the state of eventCardInfo
 useEffect(() =>{
@@ -16,16 +15,6 @@ useEffect(() =>{
     .then(res => setEventCardInfo(res))
     .catch(err => console.log(err))
 }, [])
-
-console.log(eventCardInfo)
-
-
-    useEffect(() =>{
-        axios.get("https://res.cloudinary.com/dg9s57jo8/image/upload/v1646993370/sample_image.png")
-        .then(res => setCloudImage(res))
-        .catch(err => console.log(err))
-    },[])
-
 
 ///maps event data to page
     const events = eventCardInfo?.data?.map(item =>{
@@ -43,10 +32,9 @@ console.log(eventCardInfo)
         let path = "/eventsCreatePage"
         navigate(path)
     }
-
     
 if(!eventCardInfo) return null
-    // console.log(cloudImage)
+
     return(
         <div>
             <Navbar />
@@ -54,7 +42,6 @@ if(!eventCardInfo) return null
             <div className="event-list">
                 {events}
             </div>
-            {/* <img src="https://res.cloudinary.com/dg9s57jo8/image/upload/v1646993370/sample_image.png" /> */}
         </div>
 
     )

@@ -106,21 +106,6 @@ html,body{
 .signup-button{
   margin-right: 2rem;
 }
-.event-card{
-  width: auto;
-  background-color: brown;
-  margin: 2rem;
-  margin-top: 15vh;
-  padding: 1rem;
-}
-.event-picture{
-  width: 50%;
-  margin-left: 25%;
-}
-.event-list{
-  display: grid;
-  grid-template-columns: auto auto auto;
-}
 .home-slider{
   position: relative;
   display: flex;

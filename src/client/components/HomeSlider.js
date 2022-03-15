@@ -38,7 +38,7 @@ export default function HomeSlider(props){
                 <div className="left-arrow arrow"></div>
                 
             </div>
-            <img src={data[currentId-1].img} />
+            <img alt="Cannot find Image" src={data[currentId-1].img} />
             <div onClick={clickRightArrowHome} className="right-slider">
                 <div className="right-arrow arrow"></div>
             </div>

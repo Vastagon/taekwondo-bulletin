@@ -25,7 +25,7 @@ export default function Header(props){
 
     return(//shows header and login card
         <div className="navbar"> 
-            <img onClick={goHome} className="logo" src={tkdbImage} />
+            <img alt="Cannot find Image" onClick={goHome} className="logo" src={tkdbImage} />
             <h1 className="title">{document.title}</h1>
             <div className="nav--right">
                 <Link onClick={changeNameToBlog} to="/blog" className="blog-tab nav-tabs">Blog</Link>

@@ -43,6 +43,7 @@
 .image-preview{
     width: 20vh;
     height: 20vh;
+    display: none;
 }
 .date-picker{
     margin-left: 35%;
@@ -50,4 +51,7 @@
 }
 .form-label{
     margin-left: 0%
+}
+.event-description{
+    text-align: center;
 }

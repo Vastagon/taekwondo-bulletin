@@ -69,13 +69,15 @@ export default function EventsCreatePage(){
         document.getElementById("eventDescription").value = ""
         document.getElementById("eventSlots").value = ""
         document.getElementById("eventTime").value = ""
+        setEventFormInfo(prevInfo => ({
+            ...prevInfo,
+            eventImg:Math.random(0,20)+ new Date()
+        }))
         setDroppedImage(false)
         imageDropped()
-
-        // window.location.reload()
     }
+console.log(eventFormInfo)
     function handleEventsFormChange(e){
-
         setEventFormInfo(prev =>({
             ...prev,
             [e.target.name]: e.target.value,
@@ -84,11 +86,6 @@ export default function EventsCreatePage(){
         // console.log(Array.from(formData))
     }
 
-
-    console.log(droppedImage)
-    // console.log(testImage.image)
-    console.log(eventFormInfo)
-    // console.log(formData)
     return(
         <div>
             <Navbar />
@@ -99,7 +96,7 @@ export default function EventsCreatePage(){
                 </div>
                 <div className="create-events-input">
                     <label className="form-label" htmlFor="eventDescription">Event Description</label>
-                    <input id="eventDescription" required onChange={handleEventsFormChange} name="eventDescription" className="create-events-input" type="text" placeholder="Description" />
+                    <input id="eventDescription" required onChange={handleEventsFormChange} name="eventDescription" className="event-description create-events-input" type="textarea" placeholder="Description" />
                 </div>
                 <div className="create-events-input">
                     <label className="form-label" htmlFor="eventSlots">Total Slots</label>
