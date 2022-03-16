@@ -2,15 +2,15 @@ npm run client
 
 web: nodemon ./src/server/index.js
 
-    "start": "PORT=3000 react-scripts start",
     "dev": "concurrently \"npm run server\" \"npm start\"",
 
     "start": "serve -s build",
 
-
-    "start": "PORT=3000 react-scripts start",
     "client": "webpack-dev-server --mode development --devtool inline-source-map --hot",
     "server": "node src/server/index.js",
 
 
     "start": "PORT=3000 react-scripts start",
+
+
+  "homepage": "https://taekwondo-bulletin.herokuapp.com/",
