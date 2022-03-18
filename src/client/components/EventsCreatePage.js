@@ -1,16 +1,17 @@
 import Navbar from "./Navbar"
-import "../EventsCreatePage.css"
+import "../styles/EventsCreatePage.css"
 import "react-datepicker/dist/react-datepicker.css";
 import {useState, useEffect} from "react"
 import {useDropzone} from "react-dropzone"
 import axios from "axios"
 import DatePicker from "react-datepicker"
 
-
 export default function EventsCreatePage(){
-    const [eventFormInfo, setEventFormInfo] = useState({eventName:"",eventDescription:"",eventTime:"",eventDate:new Date(), 
-    eventSlots:0, eventImg:Math.random(0,20)+ new Date()})
-    
+    const [eventFormInfo, setEventFormInfo] = useState({eventName:"",eventDescription:"", eventDate:new Date(), 
+    eventImg:Math.random(0,20)+ new Date(), eventStreet: "", eventCity: "", eventState: "", evenZip: ""})
+
+
+    console.log(eventFormInfo)
     let formData = new FormData()
     const [droppedImage, setDroppedImage] = useState(true)
     const [testImage, setTestImage] = useState({image: ""})
@@ -68,8 +69,7 @@ export default function EventsCreatePage(){
 ///Sets all values to zero and resets page
         document.getElementById("eventName").value = ""
         document.getElementById("eventDescription").value = ""
-        document.getElementById("eventSlots").value = ""
-        document.getElementById("eventTime").value = ""
+
         setEventFormInfo(prevInfo => ({
             ...prevInfo,
             eventImg:Math.random(0,20)+ new Date()
@@ -77,7 +77,7 @@ export default function EventsCreatePage(){
         setDroppedImage(false)
         imageDropped()
     }
-console.log(eventFormInfo)
+
     function handleEventsFormChange(e){
         setEventFormInfo(prev =>({
             ...prev,
@@ -98,22 +98,59 @@ console.log(eventFormInfo)
                 <div className="create-events-input">
                     <label className="form-label" htmlFor="eventDescription">Event Description</label>
                     <textarea id="eventDescription" required onChange={handleEventsFormChange} name="eventDescription" className="event-description create-events-input" type="textarea" placeholder="Description" ></textarea>
-                    {/* <input id="eventDescription" required onChange={handleEventsFormChange} name="eventDescription" className="event-description create-events-input" type="textarea" placeholder="Description" /> */}
                 </div>
                 <div className="create-events-input">
-                    <label className="form-label" htmlFor="eventSlots">Total Slots</label>
-                    <input id="eventSlots" onChange={handleEventsFormChange} name="eventSlots" className="create-events-input" type="number" placeholder="Slots" />
+                    <label  className="form-label" htmlFor="eventOrganizer">Event Organizer</label>
+                    <input id="eventOrganiser" required onChange={handleEventsFormChange} name="eventOrganizer" className="create-events-input" type="text" placeholder="Organizer" />
                 </div>
-                <div className="create-events-input">
-                    <label  className="form-label" htmlFor="eventTime">Event Time</label>
-                    <input id="eventTime" required onChange={handleEventsFormChange} name="eventTime" className="create-events-input" type="text" placeholder="Time" />
+                <div className="dates-input create-events-input">
+                    <div className="date-input-individual">
+                        <label className="form-label" htmlFor="start-date-picker">Start Date</label>
+                        <DatePicker required id="start-date-picker" className="date-picker" selected={eventFormInfo.eventStartDate} onChange={(date) => setEventFormInfo(prevInfo => ({
+                            ...prevInfo,
+                            eventStartDate: date
+                        }))} />                        
+                    </div>
+                    <div className="date-input-individual">
+                        <label className="form-label" htmlFor="end-date-picker">End Date</label>
+                        <DatePicker required id="end-date-picker" className="date-picker" selected={eventFormInfo.eventEndDate} onChange={(date) => setEventFormInfo(prevInfo => ({
+                            ...prevInfo,
+                            eventEndDate: date
+                        }))} />                    
+                    </div>
                 </div>
-                <div className="create-events-input">
-                    <label className="form-label" htmlFor="date-picker">Event Date</label>
-                    <DatePicker id="date-picker" className="date-picker" selected={eventFormInfo.eventDate} onChange={(date) => setEventFormInfo(prevInfo => ({
-                        ...prevInfo,
-                        eventDate: date
-                    }))} />
+                <div className="dates-input create-events-input">
+                    <div className="date-input-individual">
+                        <label className="form-label" htmlFor="registration-start-date-picker">Registration Opens</label>
+                        <DatePicker required id="registration-start-date-picker" className="date-picker" selected={eventFormInfo.eventRegStartDate} onChange={(date) => setEventFormInfo(prevInfo => ({
+                            ...prevInfo,
+                            eventRegStartDate: date
+                        }))} />                        
+                    </div>
+                    <div className="date-input-individual">
+                        <label className="form-label" htmlFor="registration-end-date-picker">Registration Closes</label>
+                        <DatePicker id="registration-end-date-picker" className="date-picker" selected={eventFormInfo.eventRegEndDate} onChange={(date) => setEventFormInfo(prevInfo => ({
+                            ...prevInfo,
+                            eventRegEndDate: date
+                        }))} />                    
+                    </div>
+                </div>
+                <div className="form-location">
+                    <div className="create-events-input">
+                        <label className="form-label-location" htmlFor="location-street">Street</label>
+                        <input required onChange={handleEventsFormChange} type="text" id="location-street" name="eventStreet" placeholder="Street"></input>
+
+                        <label className="form-label-location" htmlFor="location-city">City</label>
+                        <input required onChange={handleEventsFormChange} type="text" id="location-city" name="eventCity" placeholder="City"></input>
+
+                    </div>
+                    <div className="create-events-input">
+                        <label className="form-label-location" htmlFor="location-state">State</label>
+                        <input required onChange={handleEventsFormChange} type="text" id="location-state" name="eventState" placeholder="State"></input>
+
+                        <label className="form-label-location" htmlFor="location-zip">Zip Code</label>
+                        <input required onChange={handleEventsFormChange} type="text" id="location-zip" name="eventZip" placeholder="Zip Code"></input>
+                    </div>
                 </div>
   
 
@@ -131,11 +168,12 @@ console.log(eventFormInfo)
                             }
                             <p id="drag-file-text">Drag a file, or click the box</p>                            
                         </div>
-
                     </div>
-                        <button className="events-form-submit" type="submit">Submit Event</button>
+                    {/* <input required type="file" name="pdf" onChange={handleEventsFormChange}></input> */}
+
+                    <button className="events-form-submit" type="submit">Submit Event</button>
                 </div>
-                <p>{eventFormInfo.eventDate.toUTCString()}</p>
+                {/* <p>{eventFormInfo.eventDate.toUTCString()}</p> */}
             </form>      
             <div>    
             </div>

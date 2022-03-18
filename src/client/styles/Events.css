@@ -9,6 +9,7 @@
     margin: 2rem;
     margin-top: 15vh;
     padding: 1rem;
+    color: black;
 }
 .event-list{
 display: grid;

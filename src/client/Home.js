@@ -1,7 +1,7 @@
 import Navbar from "./components/Navbar";
 import HomeSlider from "./components/HomeSlider";
-import "./App.css"
-import { useEffect ,useState } from "react";
+import "./styles/App.css"
+import { useState } from "react";
 
 export default function Home(){
     const [documentTitle, setDocumentTitle] = useState("Taekwondo Bulletin")

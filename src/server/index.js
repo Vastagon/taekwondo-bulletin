@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 const path = require('path')
 const multer = require('multer')
 
-require('dotenv').config({ path: 'ENV_FILENAME' });
+require('dotenv').config();
 
 const app = express()
 const port = process.env.PORT || 5000
@@ -13,8 +13,7 @@ app.use(cors({origin: "*"}))
 app.use(express.json())
 
 
-const uri = "mongodb+srv://Vastagon:Vastagon1@taekwondobulletincluste.7nvk4.mongodb.net/TaekwondoBulletinCluster?retryWrites=true&w=majority"
-// const uri = process.env.ATLAS_URI
+const uri = process.env.ATLAS_URI
 mongoose.connect(uri, {useNewUrlParser: true})
 const connection = mongoose.connection
 connection.once('open', () =>{///once connection is open

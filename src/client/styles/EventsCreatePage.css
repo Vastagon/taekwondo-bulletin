@@ -13,7 +13,8 @@
     display: block;
     margin-top: 0;
     padding: 10px 5px;
-    margin-left: 15%;
+    margin-left: 10%;
+    width: 80%;
 }
 .img-drop{
     width: 20vh;
@@ -45,10 +46,20 @@
     height: 20vh;
     display: none;
 }
-.date-picker{
-    margin-left: 35%;
-    margin-top: 5%;
+.dates-input{
+    display: flex;
+
 }
 .form-label{
-    margin-left: 0%
+    margin-left: 10%
+}
+.event-description{
+    width: 80%;
+} 
+.form-location{
+    display: flex;
+    flex-direction: column;
+}
+.form-label-location{
+    margin: 0;
 }

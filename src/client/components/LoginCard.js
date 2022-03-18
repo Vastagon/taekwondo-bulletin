@@ -1,6 +1,5 @@
 import {Link} from "react-router-dom"
 import {useState} from "react"
-const {MongoClient} = require('mongodb')
 
 export default function LoginCard(){
     const [loginInfo, setLoginInfo] = useState({username:"", password:""})

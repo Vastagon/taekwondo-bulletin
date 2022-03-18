@@ -4,8 +4,7 @@ import Navbar from "./Navbar"
 import axios from "axios"
 import {useState, useEffect} from "react"
 import { useNavigate } from "react-router-dom"
-import {Helmet} from "react-helmet"
-import "../Events.css"
+import "../styles/Events.css"
 
 export default function Events(){
     const [eventCardInfo, setEventCardInfo] = useState()

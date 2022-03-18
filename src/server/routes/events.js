@@ -10,12 +10,20 @@ router.route('/').get((req,res) =>{
 router.route('/add').post((req,res) =>{
     const eventName = req.body.eventName
     const eventDescription = req.body.eventDescription
-    const eventDate = req.body.eventDate
-    const eventTime = req.body.eventTime
-    const eventSlots = req.body.eventSlots
     const eventImg = req.body.eventImg
+    const eventStartDate = req.body.eventStartDate
+    const eventEndDate = req.body.eventEndDate
+    const eventRegStartDate = req.body.eventRegStartDate
+    const eventRegEndDate = req.body.eventRegEndDate
+    const eventStreet = req.body.eventStreet
+    const eventZip = req.body.eventZip
+    const eventState = req.body.eventState
+    const eventCity = req.body.eventCity
+    const pdf = req.body.pdf
+    const eventOrganizer = req.body.eventOrganizer
 
-    const newEvent = new Event({eventName, eventDescription, eventDate, eventTime, eventSlots, eventImg})
+    const newEvent = new Event({eventOrganizer, pdf, eventCity, eventState, eventZip, eventStreet, eventRegEndDate, eventRegStartDate, 
+    eventEndDate, eventName, eventDescription, eventStartDate, eventImg})
 
     newEvent.save()///Mongoose again
     .then(() => res.json('Event Added'))

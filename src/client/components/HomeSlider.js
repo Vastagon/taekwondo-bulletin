@@ -1,95 +1,45 @@
-// import {useEffect, useState} from "react"
-// // import {Image} from "cloudinary-react"
-// import data from "./data"
-// // import axios from "axios"
+import {useEffect, useState} from "react"
+import {Image} from "cloudinary-react"
+import axios from "axios"
 
-// export default function HomeSlider(props){
-//     const [currentImage, setCurrentImage] = useState(3)
-//     const [imageData, setImageData] = useState({})
-//     let currentId = currentImage
-
-//     // useEffect(() =>{
-//     //     axios.get("http://localhost:5000/eventsinfo")
-//     //     .then(res => setImageData(res))
-//     // }, [])
-
-//     function clickRightArrowHome(){
-//         console.log("currentID " + currentId)
-
-
-//         if(currentId >= data.length){///changes ID and sets id back to 1 when at the end
-//             setCurrentImage(0)
-//         }
-//         console.log("currentID2 " + currentId)
-
-//         setCurrentImage(prev => prev + 1) //Adds 1 to ID
-//         currentId = currentImage;
-//         console.log(currentId)
-//     }
-//     function clickLeftArrowHome(){
-//         console.log("currentID " + currentId)
-
-//         if(currentId <= 1){///changes ID and sets id back to 3 when at the beginning of the data
-//             setCurrentImage(data.length+1)
-//         }
-
-//         setCurrentImage(prev => prev - 1) //Adds 1 to ID
-//         currentId = currentImage;
-//         console.log(currentId)
-//     }
-
-//     return(
-//         <div id="home-slider" className="home-slider">
-//             <div onClick={clickLeftArrowHome} className="left-slider">
-//                 <div className="left-arrow arrow"></div>
-                
-//             </div>
-//             {/* <img alt="Cannot find Image" src={data[currentId-1].img} /> */}
-//             {/* <Image alt="Cannot find Image" className="event-image" cloud_name="dg9s57jo8" publicId={imageData.eventImg} /> */}
-//             <div onClick={clickRightArrowHome} className="right-slider">
-//                 <div className="right-arrow arrow"></div>
-//             </div>
-//         </div>
-//     )
-// }
-
-
-
-import {useState} from "react"
-import data from "./data"
 export default function HomeSlider(props){
-    const [currentImage, setCurrentImage] = useState(3)
+    const [currentImage, setCurrentImage] = useState(0)
+    const [imageData, setImageData] = useState({})
     let currentId = currentImage
+
+    ///Sets imageData to res.data
+    useEffect(() =>{
+        axios.get("http://localhost:5000/eventsinfo")
+        .then(res => setImageData(res.data))
+    }, [])
+
     function clickRightArrowHome(){
-        console.log("currentID " + currentId)
-        if(currentId >= data.length){///changes ID and sets id back to 1 when at the end
-            setCurrentImage(0)
+        if(currentId >= imageData.length-1){///changes ID and sets id back to 0 when at the end
+            setCurrentImage(-1)
         }
-        console.log("currentID2 " + currentId)
+
         setCurrentImage(prev => prev + 1) //Adds 1 to ID
         currentId = currentImage;
-        console.log(currentId)
     }
     function clickLeftArrowHome(){
-        console.log("currentID " + currentId)
-        if(currentId <= 1){///changes ID and sets id back to 3 when at the beginning of the data
-            setCurrentImage(data.length+1)
+        if(currentId <= 0){///changes ID and sets id back to the length of the array when at the beginning of the data
+            setCurrentImage(imageData.length-1)
         }
-        setCurrentImage(prev => prev - 1) //Adds 1 to ID
+
+        setCurrentImage(prev => prev - 1) //Subtracts 1 to ID
         currentId = currentImage;
-        console.log(currentId)
     }
+
     return(
         <div id="home-slider" className="home-slider">
             <div onClick={clickLeftArrowHome} className="left-slider">
-                <div className="left-arrow arrow"></div>
-
+                <div className="left-arrow arrow"></div>    
             </div>
-            <img src={data[currentId-1].img} />
-            <img alt="Cannot find Image" src={data[currentId-1].img} />
+            <Image alt="Cannot find Image" className="event-image" cloud_name="dg9s57jo8" publicId={imageData[currentImage]?.eventImg} />
             <div onClick={clickRightArrowHome} className="right-slider">
                 <div className="right-arrow arrow"></div>
             </div>
         </div>
     )
 }
+
