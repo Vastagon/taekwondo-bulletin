@@ -9,15 +9,15 @@ export default function(){
     return(
         <div className="total-event-card-shown">
             <h1>{data.eventName}</h1>
-            <p>{`Event Starts at: ${data.eventStartDate}`}</p>
-            <p>{`Event Ends at: ${data.eventEndDate}`}</p>
+            <p>{`Event Starts at: ${data.eventStartDate.substring(0,10)}`}</p>
+            <p>{`Event Ends at: ${data.eventEndDate.substring(0,10)}`}</p>
 
-            <p>{`Event Registration Starts at: ${data.eventRegStartDate}`}</p>
-            <p>{`Event Registration Ends at: ${data.eventRegEndDate}`}</p>
+            <p>{`Event Registration Starts at: ${data.eventRegStartDate.substring(0,10)}`}</p>
+            <p>{`Event Registration Ends at: ${data.eventRegEndDate.substring(0,10)}`}</p>
 
             <p>{`Organizer: ${data.eventOrganizer}`}</p>
 
-            <p>{`Address: ${data.eventEndDate}`}</p>
+            <p>{`Address: ${data.eventStreet}, ${data.eventCity}, ${data.eventState}, ${data.eventZip}`}</p>
 
         </div>
     )

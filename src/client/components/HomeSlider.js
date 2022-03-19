@@ -35,7 +35,7 @@ export default function HomeSlider(props){
             <div onClick={clickLeftArrowHome} className="left-slider">
                 <div className="left-arrow arrow"></div>    
             </div>
-            <Image alt="Cannot find Image" className="event-image" cloud_name="dg9s57jo8" publicId={imageData[currentImage]?.eventImg} />
+            <Image id="slider-image" alt="Cannot find Image" className="event-image" cloud_name="dg9s57jo8" publicId={imageData[currentImage]?.eventImg} />
             <div onClick={clickRightArrowHome} className="right-slider">
                 <div className="right-arrow arrow"></div>
             </div>

@@ -8,7 +8,6 @@ export default function Home(){
 
     return(
         <div>
-
             <Navbar documentTitle={documentTitle}/>
             <HomeSlider />
             <h1>About</h1>

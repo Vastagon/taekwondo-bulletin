@@ -22,9 +22,6 @@ html,body{
   justify-content: center;
   align-items: center;
 }
-.title{
-
-}
 .logo{
   height: 10vh;
   width: auto;
@@ -198,6 +195,27 @@ html,body{
   height: 30%;
   padding: 5px;
 }
+.hamburger-icon{
+  width: 9vh;
+  height: 9vh;
+  position: relative;
+  margin-top: 20vh;
+}
+.event-image{
+  animation-duration: 3s;
+  animation-name: slide-image;
+
+}
+@keyframes slide-image {
+  from{
+    margin-left: 100%;
+    width: 300%;
+  }
+  to{
+    margin-left: 0%;
+    width: 100%;
+  }
+}
 
 @media screen and (max-width: 500px) {
   .navbar{
@@ -209,6 +227,31 @@ html,body{
     display: flex;
   }
   .title{
-    font-size: .1rem;
+    font-size: 1.5rem;
+  }
+  .desktop-navbar{
+    display: none;
+  }
+  .nav-hamburger{
+    height: 6vh;
+    width: 6vh;
+    padding-right: 2%;
+  }
+  .nav-ham{
+    display: none;
+    position: absolute;
+    flex-direction: column;
+    right: 0;
+    top: 10vh;
+  }
+  .nav-right{
+
+  }
+  .login-tab{
+    margin: 0;
+  }
+  .nav-tabs{
+    font-size: 2rem;
+    margin-top: 2rem;
   }
 }
