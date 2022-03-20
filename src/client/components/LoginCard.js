@@ -1,5 +1,6 @@
 import {Link} from "react-router-dom"
 import {useState} from "react"
+import "../styles/App.css"
 
 export default function LoginCard(){
     const [loginInfo, setLoginInfo] = useState({username:"", password:""})
@@ -16,8 +17,6 @@ export default function LoginCard(){
         }))
     }
 
-    
-    console.log(loginInfo)
     return(
         <div className="login-card">
             <h3 className="login-title">Login</h3>

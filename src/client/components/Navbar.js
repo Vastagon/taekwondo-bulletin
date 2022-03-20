@@ -12,15 +12,13 @@ export default function Header({documentTitle}){
     window.addEventListener("resize", ()=>{
         setWindowWidth(window.innerWidth)
     })
-///Makes the mobile nav not show on start
-    if(document.getElementById('nav-ham')){
-        document.getElementById('nav-ham').style.display = "none"
-    }
+
 ///Shows Login card
     function loginClickListener(){
         if(document.title != "Signup"){
             setShowLogin(prev => !prev)
         }
+        console.log(showLogin)
     }
 ///Goes to home page and blog
     function goHome(){
@@ -36,11 +34,13 @@ export default function Header({documentTitle}){
         }
     }
    
-
+    
     return(//shows header and login card
         <div className="navbar"> 
             <img alt="Cannot find Image" onClick={goHome} className="logo" src={tkdbImage} />
             <h1 className="title">{documentTitle}</h1>
+            {showLogin ? <LoginCard /> : null}
+
                 {windowWidth > 500 ? 
                 <div className="nav--right">
                     <Link to="/blog" className="desktop-navbar blog-tab nav-tabs">Blog</Link>

@@ -92,16 +92,22 @@ html,body{
 }
 .login-title{
   width: 100%;
-  margin-left: 75%;
+  text-align: center;
 }
 .login-form-button{
+  position: absolute;
+  right: 10%;
   margin-top: 2rem;
   padding: .8rem 2rem;
   border-radius: 30px;
   border-style: hidden;
+  width: 30%;
+  bottom: 10%;
 }
 .signup-button{
-  margin-right: 2rem;
+  position: absolute;
+  left: 10%;
+  width: 30%;
 }
 .home-slider{
   position: relative;
@@ -201,10 +207,13 @@ html,body{
   position: relative;
   margin-top: 20vh;
 }
+.nav-ham{
+  display: none;
+
+}
 .event-image{
   animation-duration: 3s;
   animation-name: slide-image;
-
 }
 @keyframes slide-image {
   from{
@@ -214,6 +223,28 @@ html,body{
   to{
     margin-left: 0%;
     width: 100%;
+  }
+}
+
+@media screen and (max-width: 850px) {/* Tablet Screen */
+  .title{
+    font-size: 1.5rem;
+  }
+  .nav-tabs{
+    font-size: 1rem;
+    margin-right: 1.5rem;
+  }
+  .events-tab:hover::before{
+    right: 5.2rem;
+    width: 3rem;
+  }
+  .login-tab:hover::before{
+    right: 1.1rem;
+    width: 2.8rem;
+  }
+  .blog-tab:hover::before{
+    right: 9.5rem;
+    width: 2rem;
   }
 }
 
@@ -238,7 +269,6 @@ html,body{
     padding-right: 2%;
   }
   .nav-ham{
-    display: none;
     position: absolute;
     flex-direction: column;
     right: 0;

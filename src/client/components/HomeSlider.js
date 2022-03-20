@@ -23,13 +23,11 @@ export default function HomeSlider(props){
     }
     function clickLeftArrowHome(){
         if(currentId <= 0){///changes ID and sets id back to the length of the array when at the beginning of the data
-            setCurrentImage(imageData.length-1)
+            setCurrentImage(imageData.length)
         }
-
         setCurrentImage(prev => prev - 1) //Subtracts 1 to ID
         currentId = currentImage;
     }
-
     return(
         <div id="home-slider" className="home-slider">
             <div onClick={clickLeftArrowHome} className="left-slider">

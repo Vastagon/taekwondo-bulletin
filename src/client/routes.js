@@ -8,7 +8,7 @@ import EventsCreatePage from "./components/EventsCreatePage"
 import TotalEventCardShown from "./components/TotalEventCardShown"
 
 export default function routes({routesInfo}){
-console.log({routesInfo})
+// console.log({routesInfo})
 
   const eventsRoutes = routesInfo?.map((prevInfo) =>{
     return(
