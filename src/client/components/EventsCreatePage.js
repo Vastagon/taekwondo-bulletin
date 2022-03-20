@@ -111,7 +111,7 @@ export default function EventsCreatePage(){
                             eventStartDate: date
                         }))} />                        
                     </div>
-                    <div className="date-input-individual">
+                    <div className="date-input-right date-input-individual">
                         <label className="form-label" htmlFor="end-date-picker">End Date</label>
                         <DatePicker required id="end-date-picker" className="date-picker" selected={eventFormInfo.eventEndDate} onChange={(date) => setEventFormInfo(prevInfo => ({
                             ...prevInfo,
@@ -127,7 +127,7 @@ export default function EventsCreatePage(){
                             eventRegStartDate: date
                         }))} />                        
                     </div>
-                    <div className="date-input-individual">
+                    <div className="date-input-right date-input-individual">
                         <label className="form-label" htmlFor="registration-end-date-picker">Registration Closes</label>
                         <DatePicker id="registration-end-date-picker" className="date-picker" selected={eventFormInfo.eventRegEndDate} onChange={(date) => setEventFormInfo(prevInfo => ({
                             ...prevInfo,
@@ -137,16 +137,21 @@ export default function EventsCreatePage(){
                 </div>
                 <div className="form-location">
                     <div className="create-events-input">
-                        <label className="form-label-location" htmlFor="location-street">Street</label>
-                        <input required onChange={handleEventsFormChange} type="text" id="location-street" name="eventStreet" placeholder="Street"></input>
+                        <div className="two-location-inputs">
+                            <label className="form-label-location" htmlFor="location-street">Street</label>
+                            <input required onChange={handleEventsFormChange} type="text" id="location-street" name="eventStreet" placeholder="Street"></input>
+
+                        </div>
 
                         <label className="form-label-location" htmlFor="location-city">City</label>
                         <input required onChange={handleEventsFormChange} type="text" id="location-city" name="eventCity" placeholder="City"></input>
 
                     </div>
                     <div className="create-events-input">
-                        <label className="form-label-location" htmlFor="location-state">State</label>
-                        <input required onChange={handleEventsFormChange} type="text" id="location-state" name="eventState" placeholder="State"></input>
+                        <div className="two-location-inputs">
+                            <label className="form-label-location" htmlFor="location-state">State</label>
+                            <input required onChange={handleEventsFormChange} type="text" id="location-state" name="eventState" placeholder="State"></input>
+                        </div>
 
                         <label className="form-label-location" htmlFor="location-zip">Zip Code</label>
                         <input required onChange={handleEventsFormChange} type="text" id="location-zip" name="eventZip" placeholder="Zip Code"></input>
@@ -173,7 +178,6 @@ export default function EventsCreatePage(){
 
                     <button className="events-form-submit" type="submit">Submit Event</button>
                 </div>
-                {/* <p>{eventFormInfo.eventDate.toUTCString()}</p> */}
             </form>      
             <div>    
             </div>

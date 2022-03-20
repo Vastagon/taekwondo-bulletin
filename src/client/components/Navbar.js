@@ -18,7 +18,7 @@ export default function Header({documentTitle}){
         if(document.title != "Signup"){
             setShowLogin(prev => !prev)
         }
-        console.log(showLogin)
+        document.getElementById('nav-ham').style.display = "none"
     }
 ///Goes to home page and blog
     function goHome(){

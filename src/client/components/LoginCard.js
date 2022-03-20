@@ -21,8 +21,8 @@ export default function LoginCard(){
         <div className="login-card">
             <h3 className="login-title">Login</h3>
             <form onSubmit={loginSubmit} className="login-form">
-                <input onChange={changeLoginInfo} className="login-text" name="username" type="text" placeholder="Username" />
-                <input onChange={changeLoginInfo} className="login-text" name="password" type="text" placeholder="Password" />
+                <input onChange={changeLoginInfo} className="login-text-username login-text" name="username" type="text" placeholder="Username" />
+                <input onChange={changeLoginInfo} className="login-text-password login-text" name="password" type="text" placeholder="Password" />
                 <div className="login-card-buttons">
                     <Link to="/signup">
                     <button className="signup-button login-form-button">Sign up</button>

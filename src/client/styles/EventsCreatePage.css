@@ -63,3 +63,27 @@
 .form-label-location{
     margin: 0;
 }
+
+    /* Tablet Responsiveness */
+@media screen and (max-width: 800px) {
+    .date-input-individual, .date-picker{
+        width: 70%;
+    }
+    .date-input-right{
+        margin-left: 0%;
+    }
+    .dates-input{
+        align-items: center;
+        justify-content: center;
+    }
+    .create-events-input{
+        display: block;
+        margin-top: 0;
+        padding: 10px 5px;
+        margin-left: 10%;
+        width: 80%;
+    }
+    .two-location-inputs{
+        position: relative;
+    }
+}
