@@ -14,3 +14,5 @@ web: nodemon ./src/server/index.js
 
 
   "homepage": "https://taekwondo-bulletin.herokuapp.com/",
+
+    "build": "react-scripts build",

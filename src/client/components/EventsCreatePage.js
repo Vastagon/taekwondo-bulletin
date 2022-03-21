@@ -5,10 +5,13 @@ import {useState, useEffect} from "react"
 import {useDropzone} from "react-dropzone"
 import axios from "axios"
 import DatePicker from "react-datepicker"
+import states from "./states.json"
+import {v4 as uuid} from "uuid"
+
 
 export default function EventsCreatePage(){
     const [eventFormInfo, setEventFormInfo] = useState({eventName:"",eventDescription:"", eventDate:new Date(), 
-    eventImg:Math.random(0,20)+ new Date(), eventStreet: "", eventCity: "", eventState: "", evenZip: ""})
+    eventImg:Math.random(0,20)+ new Date(), eventStreet: "", eventCity: ""})
 
 
     console.log(eventFormInfo)
@@ -16,6 +19,8 @@ export default function EventsCreatePage(){
     const [droppedImage, setDroppedImage] = useState(true)
     const [testImage, setTestImage] = useState({image: ""})
     const [documentTitle, setDocumentTitle] = useState("Create New Event")
+    // const [statesList, setStatesList] = useState(states[0].name)
+
 
     formData.append("api_key", "336683864383724")
     formData.append("file", testImage.image)
@@ -82,11 +87,30 @@ export default function EventsCreatePage(){
         setEventFormInfo(prev =>({
             ...prev,
             [e.target.name]: e.target.value,
-        }))
+            value: e.target.value
 
+        }))
+        
         // console.log(Array.from(formData))
     }
 
+///Maps a list of options for the state dropdown
+
+    const statesList = states.map((prev) =>{
+        return(
+            <option key={uuid()} value={prev.name}>{prev.name}</option>
+        )
+    })
+
+    
+    function handleEventStateChange(e){
+        setEventFormInfo(prev =>({
+            ...prev,
+            [e.target.name]: e.target.value,
+            value: e.target.value
+        }))
+    }
+    
     return(
         <div>
             <Navbar documentTitle={documentTitle} />
@@ -150,7 +174,9 @@ export default function EventsCreatePage(){
                     <div className="create-events-input">
                         <div className="two-location-inputs">
                             <label className="form-label-location" htmlFor="location-state">State</label>
-                            <input required onChange={handleEventsFormChange} type="text" id="location-state" name="eventState" placeholder="State"></input>
+                            <select name="eventState" onChange={handleEventsFormChange}>
+                                {statesList}
+                            </select>
                         </div>
 
                         <label className="form-label-location" htmlFor="location-zip">Zip Code</label>
