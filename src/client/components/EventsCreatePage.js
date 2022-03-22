@@ -7,20 +7,17 @@ import axios from "axios"
 import DatePicker from "react-datepicker"
 import states from "./states.json"
 import {v4 as uuid} from "uuid"
-
+import Select from "react-select"
 
 export default function EventsCreatePage(){
     const [eventFormInfo, setEventFormInfo] = useState({eventName:"",eventDescription:"", eventDate:new Date(), 
-    eventImg:Math.random(0,20)+ new Date(), eventStreet: "", eventCity: ""})
-
+    eventImg:Math.random(0,20)+ new Date(), eventStreet: "", eventCity: "", eventState:""})
 
     console.log(eventFormInfo)
     let formData = new FormData()
     const [droppedImage, setDroppedImage] = useState(true)
     const [testImage, setTestImage] = useState({image: ""})
     const [documentTitle, setDocumentTitle] = useState("Create New Event")
-    // const [statesList, setStatesList] = useState(states[0].name)
-
 
     formData.append("api_key", "336683864383724")
     formData.append("file", testImage.image)
@@ -102,15 +99,13 @@ export default function EventsCreatePage(){
         )
     })
 
-    
-    function handleEventStateChange(e){
-        setEventFormInfo(prev =>({
+    function handleChange(props){
+        setEventFormInfo(prev => ({
             ...prev,
-            [e.target.name]: e.target.value,
-            value: e.target.value
+            eventState: props.label
         }))
     }
-    
+
     return(
         <div>
             <Navbar documentTitle={documentTitle} />
@@ -174,9 +169,11 @@ export default function EventsCreatePage(){
                     <div className="create-events-input">
                         <div className="two-location-inputs">
                             <label className="form-label-location" htmlFor="location-state">State</label>
-                            <select name="eventState" onChange={handleEventsFormChange}>
+                            <Select onChange={handleChange} options={states} />
+
+                            {/* <select name="eventState" onChange={handleEventsFormChange}>
                                 {statesList}
-                            </select>
+                            </select> */}
                         </div>
 
                         <label className="form-label-location" htmlFor="location-zip">Zip Code</label>
