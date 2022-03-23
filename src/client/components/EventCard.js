@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export default function EventCard(props){
     return(
-        <Link style={{ textDecoration: 'none' }} to={`/events/${props.item._id}`} state={{ data: props.item }}>
+        <Link className="single-card-link" to={`/events/${props.item._id}`} state={{ data: props.item }}>
             <div className="event-card">
                 <h3 className="event-name">{`${props.item.eventName}`}</h3>
                 <Image alt="Cannot find Image" className="event-image-eventspage" cloud_name="dg9s57jo8" publicId={props.item.eventImg} />

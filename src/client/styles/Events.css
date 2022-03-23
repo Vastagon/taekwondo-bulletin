@@ -7,19 +7,47 @@
     width: auto;
     background-color: brown;
     margin: 2rem;
-    margin-top: 15vh;
+    margin-top: 2vh;
     padding: 1rem;
     color: black;
+    height: 40vh;
 }
 .event-list{
-display: grid;
-grid-template-columns: 33% 33% auto;
+    display: grid;
+    position: absolute;
+    top: 20vh;
+    grid-template-columns: 25% 25% 25% 25%;
+    width: 100%;
 }
 .event-name{
     text-align: center;
 }
 .event-description{
     margin-top: 1.5rem;
+}
+.single-card-link{
+    text-decoration: none;
+}
+.events-tag-search{
+    height: 6vh;
+    position: absolute;
+    top: 10vh;
+    left: 0;
+    width: 100vw;
+    background-color: #2a333e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.new-event-button{
+    margin: 0;
+    position: absolute;
+    right: 5%;
+    padding: 8px 5px;
+}
+.state-tag-dropdown{
+    position: absolute;
+    left: -45%;
 }
 
 @media screen and (max-width: 850px) {
