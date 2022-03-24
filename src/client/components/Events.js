@@ -4,7 +4,7 @@ import Navbar from "./Navbar"
 import axios from "axios"
 import {useState, useEffect} from "react"
 import { useNavigate } from "react-router-dom"
-import states from "./states.json"
+import states from "./tagSearchStates.json"
 import Select from "react-select"
 import "../styles/Events.css"
 
@@ -12,7 +12,7 @@ export default function Events(){
     const [eventCardInfo, setEventCardInfo] = useState()
     const [documentTitle, setDocumentTitle] = useState("Events")
     const [stateTagSearch, setStateTagSearch] = useState()
-
+    let counter = 0;
 
 ///Gets data for events and sets the state of eventCardInfo
 useEffect(() =>{
@@ -23,7 +23,8 @@ useEffect(() =>{
 
 ///maps event data to page
     const events = eventCardInfo?.data?.map(item =>{
-        if(stateTagSearch == undefined){
+        if(stateTagSearch == undefined || stateTagSearch.label == "All Events"){
+            counter++
             return(
                 <EventCard 
                 key = {uuid()}
@@ -32,6 +33,7 @@ useEffect(() =>{
             )            
         }
         if(stateTagSearch && item.eventState == stateTagSearch.label){
+            counter++
             return(
                 <EventCard 
                 key = {uuid()}
@@ -53,6 +55,7 @@ useEffect(() =>{
     
 
 if(!eventCardInfo) return null
+
     return(
         <div>
             <Navbar documentTitle={documentTitle}/>
@@ -62,7 +65,7 @@ if(!eventCardInfo) return null
                 <button className="new-event-button" onClick={createEventsRouteChange} >New Event</button>
             </div>
             <div className="event-list">
-                {events}
+                {counter > 0 ? events : <p className="no-events-text">No events in this state</p>}
             </div>
         </div>
 

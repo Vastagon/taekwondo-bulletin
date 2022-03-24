@@ -34,8 +34,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "server": "nodemon ./src/server/index.js",
-    "build": "npm run build --prefix build",
-    "client": "npm start --prefix build",
+    "build": "react-scripts build",
+    "client": "concurrently \"serve -s build\" \"\"npm run server",
     "start": "PORT=3000 react-scripts start",
     "dev": "concurrently \"npm run server\" \"npm start\""
   },

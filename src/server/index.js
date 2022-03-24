@@ -4,10 +4,14 @@ const mongoose = require('mongoose')
 const path = require('path')
 const multer = require('multer')
 
+
 require('dotenv').config();
 
 const app = express()
 const port = process.env.PORT || 5000
+
+
+
 
 app.use(cors({origin: "*"}))
 app.use(express.json())
@@ -35,25 +39,10 @@ app.use("/users", usersRouter)
 app.use("/eventsinfo", eventsRouter)
 app.use("/addimage", imageRouter)
 
-const publicPath = path.join(__dirname, "../", "../", "public")
 
+console.log(path.join(__dirname, "../", "../", "build"))
+app.use(express.static(path.join(__dirname)));
 
-console.log(publicPath)
-app.get("*", (req, res) => {
-    res.sendFile(path.join(publicPath, "index.html"));
-});
-
-app.use(express.static(publicPath))
-
-
-
-if(process.env.NODE_ENV === 'production') {
-    app.use(express.static(publicPath))
-    
-    app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname+'/client/public/index.html'));
-    })
-}
 
 app.listen(port, () =>{
     console.log(`The server is running on port ${port}`)

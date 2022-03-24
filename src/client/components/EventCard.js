@@ -10,10 +10,8 @@ export default function EventCard(props){
                 <Image alt="Cannot find Image" className="event-image-eventspage" cloud_name="dg9s57jo8" publicId={props.item.eventImg} />
                 <p className="event-description">{props.item.eventDescription}</p>
                 <p>{`Register by: ${props?.item?.eventRegEndDate?.toString().substring(0,10)}`}</p>
-                {/* <p>{`Starts at: ${props?.item?.eventStartDate?.toString().substring(0,10)}`}</p>
-                <p>{`Ends at: ${props?.item?.eventEndDate?.toString().substring(0,10)}`}</p> */}
+                <p>State: {props?.item?.eventState}</p>
             </div>         
-        </Link>
-            
+        </Link>   
     )
 }

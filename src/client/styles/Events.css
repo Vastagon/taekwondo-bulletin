@@ -46,8 +46,15 @@
     padding: 8px 5px;
 }
 .state-tag-dropdown{
-    position: absolute;
-    left: -45%;
+    position: inline-block;
+    left: 0;
+    margin-right: 80vw;
+}
+.no-events-text{
+    color: white;
+    font-size: 2rem;
+    text-align: center;
+    width: 100vw;
 }
 
 @media screen and (max-width: 850px) {

@@ -5,7 +5,6 @@ export default function(){
     const location = useLocation()
     const data = location.state?.data///Gets card data
 
-    console.log(data)
     return(
         <div className="total-event-card-shown">
             <h1>{data.eventName}</h1>

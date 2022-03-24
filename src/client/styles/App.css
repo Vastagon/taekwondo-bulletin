@@ -213,20 +213,7 @@ html,body{
   display: none;
 
 }
-/* .event-image{
-  animation-duration: 3s;
-  animation-name: slide-image;
-}
-@keyframes slide-image {
-  from{
-    margin-left: 100%;
-    width: 300%;
-  }
-  to{
-    margin-left: 0%;
-    width: 100%;
-  }
-} */
+
 
 @media screen and (max-width: 850px) {/* Tablet Screen */
   .title{
