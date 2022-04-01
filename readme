@@ -1,18 +1,5 @@
-npm run client
+### `Install packages`
+Install the packages using npm install before trying to run the program
 
-web: nodemon ./src/server/index.js
-
-    "dev": "concurrently \"npm run server\" \"npm start\"",
-
-    "start": "serve -s build",
-
-    "client": "webpack-dev-server --mode development --devtool inline-source-map --hot",
-    "server": "node src/server/index.js",
-
-
-    "start": "PORT=3000 react-scripts start",
-
-
-  "homepage": "https://taekwondo-bulletin.herokuapp.com/",
-
-    "build": "react-scripts build",
+### `npm run dev`
+Uses the concurrently package to run the server and run the react-scripts
