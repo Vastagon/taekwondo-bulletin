@@ -48,6 +48,9 @@ html,body{
   padding: 0;
   margin-right: 2rem;
 }
+.loggedin-email{
+  font-size: 1rem;
+}
 .events-tab:hover::before, .login-tab:hover::before, .blog-tab:hover::before{
   position: fixed;
   left: auto;

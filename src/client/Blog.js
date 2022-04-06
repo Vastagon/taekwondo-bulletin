@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import axios from 'axios';
 
 
-export default function Blog() {
+export default function Blog({auth}) {
     const [blogPost, setBlogPost] = useState({postContent:""})
     const [showBlogPost, setShowBlogPost] = useState()
     const [documentTitle, setDocumentTitle] = useState("Blog")
@@ -44,7 +44,7 @@ export default function Blog() {
 
       return(
           <div className="blog">
-              <Navbar documentTitle={documentTitle} />
+              <Navbar auth={auth} documentTitle={documentTitle} />
               <div className="all-blog-posts">
                 {writeBlogPostsToPage}
               </div>

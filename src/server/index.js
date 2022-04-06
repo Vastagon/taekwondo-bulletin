@@ -29,13 +29,13 @@ connection.once('open', () =>{///once connection is open
 // const exercisesRouter = require('./routes/exercises')
 // const usersRouter = require('./routes/users')
 const blogpostsRouter = require("./routes/blogposts")
-const usersRouter = require('./routes/users')
+// const usersRouter = require('./routes/users')
 const eventsRouter = require('./routes/events')
 const imageRouter = require("./routes/image")
 
 // app.use("/exercises", exercisesRouter)///
 app.use("/blogposts", blogpostsRouter)//when going to blogposts, it loads exercises router
-app.use("/users", usersRouter)
+// app.use("/users", usersRouter)
 app.use("/eventsinfo", eventsRouter)
 app.use("/addimage", imageRouter)
 

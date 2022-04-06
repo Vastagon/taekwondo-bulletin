@@ -1,13 +1,28 @@
 import {Link} from "react-router-dom"
 import {useState} from "react"
 import "../styles/App.css"
+import { signInWithEmailAndPassword } from "firebase/auth";
 
-export default function LoginCard(){
-    const [loginInfo, setLoginInfo] = useState({username:"", password:""})
+
+export default function LoginCard({auth}){
+    const [loginInfo, setLoginInfo] = useState({email:"", password:""})
 
     ///Handles login submit
     function loginSubmit(e){
         e.preventDefault()
+        ///Firebase sign in function
+        signInWithEmailAndPassword(auth, loginInfo.email, loginInfo.password)
+        .then((userCredential) => {
+            const user = userCredential.user
+            console.log(user)
+            window.location.reload()
+
+        })
+        ///Handles errors
+        .catch((error) =>{
+            const errorCode = error.code
+            const errorMessage = error.message
+        })
 
     }
     
@@ -23,7 +38,7 @@ export default function LoginCard(){
         <div className="login-card">
             <h3 className="login-title">Login</h3>
             <form onSubmit={loginSubmit} className="login-form">
-                <input onChange={changeLoginInfo} className="login-text-username login-text" name="username" type="text" placeholder="Username" />
+                <input onChange={changeLoginInfo} className="login-text-username login-text" name="email" type="text" placeholder="email" />
                 <input onChange={changeLoginInfo} className="login-text-password login-text" name="password" type="text" placeholder="Password" />
                 <div className="login-card-buttons">
                     <Link to="/signup">

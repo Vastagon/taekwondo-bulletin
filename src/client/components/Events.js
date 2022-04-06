@@ -8,7 +8,7 @@ import states from "./tagSearchStates.json"
 import Select from "react-select"
 import "../styles/Events.css"
 
-export default function Events(){
+export default function Events({auth}){
     const [eventCardInfo, setEventCardInfo] = useState()
     const [documentTitle, setDocumentTitle] = useState("Events")
     const [stateTagSearch, setStateTagSearch] = useState()
@@ -61,7 +61,7 @@ if(!eventCardInfo) return null
 
     return(
         <div>
-            <Navbar documentTitle={documentTitle}/>
+            <Navbar auth={auth} documentTitle={documentTitle}/>
             <div className="events-tag-search">
                 <Select className="state-tag-dropdown" placeholder="State" onChange={setStateTagSearch} options={states} />
 
