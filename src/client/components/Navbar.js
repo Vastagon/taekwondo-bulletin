@@ -9,22 +9,19 @@ export default function Header({auth, documentTitle}){
     const [windowWidth, setWindowWidth] = useState(window.innerWidth)
     const [showLogin, setShowLogin] = useState(false)
     let navigate = useNavigate();
-    
-        console.log(auth)
-
 
     window.addEventListener("resize", ()=>{
         setWindowWidth(window.innerWidth)
     })
 
-///Shows Login card
+    ///Shows Login card
     function loginClickListener(){
         if(document.title != "Signup"){
             setShowLogin(prev => !prev)
         }
         document.getElementById('nav-ham').style.display = "none"
     }
-///Goes to home page and blog
+    ///Goes to home page and blog
     function goHome(){
         navigate("/")
     }
@@ -56,8 +53,8 @@ export default function Header({auth, documentTitle}){
                 <div className="nav--right">
                     <Link to="/blog" className="desktop-navbar blog-tab nav-tabs">Blog</Link>
                     <Link to="/events" className="desktop-navbar events-tab nav-tabs">Events</Link>
-                    {auth.currentUser ? <p className="loggedin-email desktop-navbar nav-tabs">{auth?.currentUser?.email}</p> :<h4 onClick={loginClickListener} className="desktop-navbar login-tab nav-tabs">Login</h4>}
-                    {auth.currentUser ? <button onClick={handleSignOut}>Sign Out</button> : null}
+                    {auth?.currentUser ? <p className="loggedin-email desktop-navbar nav-tabs">{auth?.currentUser?.email}</p> :<h4 onClick={loginClickListener} className="desktop-navbar login-tab nav-tabs">Login</h4>}
+                    {auth?.currentUser ? <button onClick={handleSignOut}>Sign Out</button> : null}
                 </div>
                 : 
                 <img onClick={showHamNavFunction} className="nav-hamburger nav--right" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/1024px-Hamburger_icon.svg.png" alt="not here" />}
