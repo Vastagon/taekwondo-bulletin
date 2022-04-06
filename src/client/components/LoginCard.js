@@ -5,11 +5,13 @@ import "../styles/App.css"
 export default function LoginCard(){
     const [loginInfo, setLoginInfo] = useState({username:"", password:""})
 
+    ///Handles login submit
     function loginSubmit(e){
         e.preventDefault()
 
     }
     
+    ///Handles login info change
     function changeLoginInfo(e){
         setLoginInfo(prevLogin => ({
             ...prevLogin,

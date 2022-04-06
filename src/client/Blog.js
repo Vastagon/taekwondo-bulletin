@@ -9,25 +9,29 @@ export default function Blog() {
     const [showBlogPost, setShowBlogPost] = useState()
     const [documentTitle, setDocumentTitle] = useState("Blog")
     
+    ///Gets the data from localhost and sets it to showBlogPost
     useEffect(() =>{
       axios.get("http://localhost:5000/blogposts")
         .then(res => setShowBlogPost(res.data))
         .catch(err => console.log(err))
     }, [])
 
+    ///writes all blog posts to page
     const writeBlogPostsToPage = showBlogPost?.map(post =>{
       return <p key={post._id} className="blog-entries">{post.postContent}</p>
     })
 
-
+    ///Changes the blogPost object to the text input
     function onChangeBlogPost(e){
       e.preventDefault()
       setBlogPost({postContent: e.target.value})
     }
 
+    ///Happens whenever the user submits a post
     function onFormSubmit(e){
       e.preventDefault()
 
+      ///posts the blogPost object to localhost, which will post that data to mongodb
       axios.post("http://localhost:5000/blogposts/add", blogPost)
       .then(res => console.log(res.data))
       window.location.reload()

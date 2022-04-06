@@ -24,7 +24,7 @@ export default function Header({documentTitle}){
     function goHome(){
         navigate("/")
     }
-
+    ///Displays HamNav if the page innerWidth is =< 500
     function showHamNavFunction(){
         setShowHamNav(prev => !prev)
         if(showHamNav){
@@ -40,7 +40,7 @@ export default function Header({documentTitle}){
             <img alt="Cannot find Image" onClick={goHome} className="logo" src={tkdbImage} />
             <h1 className="title">{documentTitle}</h1>
             {showLogin ? <LoginCard /> : null}
-
+                {/* Conditional rendering for hamNav */}
                 {windowWidth > 500 ? 
                 <div className="nav--right">
                     <Link to="/blog" className="desktop-navbar blog-tab nav-tabs">Blog</Link>

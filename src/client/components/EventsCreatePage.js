@@ -6,24 +6,25 @@ import {useDropzone} from "react-dropzone"
 import axios from "axios"
 import DatePicker from "react-datepicker"
 import states from "./states.json"
-import {v4 as uuid} from "uuid"
 import Select from "react-select"
 
 export default function EventsCreatePage(){
     const [eventFormInfo, setEventFormInfo] = useState({eventName:"",eventDescription:"", eventDate:new Date(), 
     eventImg:Math.random(0,20)+ new Date(), eventStreet: "", eventCity: "", eventState:""})
 
-    console.log(eventFormInfo)
+    // console.log(eventFormInfo)
     let formData = new FormData()
     const [droppedImage, setDroppedImage] = useState(true)
     const [testImage, setTestImage] = useState({image: ""})
     const [documentTitle, setDocumentTitle] = useState("Create New Event")
 
+    ///formData for the cloudinary upload
     formData.append("api_key", "336683864383724")
     formData.append("file", testImage.image)
     formData.append("upload_preset", "zi4rfynp") 
     formData.append("public_id", eventFormInfo.eventImg)
 
+    ///uses react dropzone to drop an image for the event
     const {getRootProps, getInputProps} = useDropzone({
         accept: "image/*",
         onDrop: (acceptedFiles) => {
@@ -48,15 +49,17 @@ export default function EventsCreatePage(){
     useEffect(() =>{
         imageDropped()
     }, [eventFormInfo.eventImg])
-    function imageDropped(){
 
+    ///Function that is called when an image is dropped
+    function imageDropped(){
         if(!droppedImage){
             document.getElementById('drag-file-text').style.display = "none"
         }else{
             document.getElementById('drag-file-text').style.display = "absolute"
         }
     }
-///Form submit handler
+
+    ///Form submit handler
     function createEventFormSubmit(e){
         e.preventDefault()        
         uploadImage()
@@ -68,37 +71,31 @@ export default function EventsCreatePage(){
 
         axios.post("http://localhost:5000/eventsinfo/add", eventFormInfo)
         .then(res => console.log(res.data))
-///Sets all values to zero and resets page
+        ///Sets all values to zero and resets page
         document.getElementById("eventName").value = ""
         document.getElementById("eventDescription").value = ""
 
+        ///Sets eventImg in eventFormInfo to a new ID
         setEventFormInfo(prevInfo => ({
             ...prevInfo,
             eventImg:Math.random(0,20)+ new Date()
         }))
         setDroppedImage(false)
-        imageDropped()
+        // imageDropped()
     }
 
+    ///Changes the info in the eventFormInfo object when changed on page
     function handleEventsFormChange(e){
         setEventFormInfo(prev =>({
             ...prev,
             [e.target.name]: e.target.value,
             value: e.target.value
-
         }))
         
         // console.log(Array.from(formData))
     }
 
-///Maps a list of options for the state dropdown
-
-    const statesList = states.map((prev) =>{
-        return(
-            <option key={uuid()} value={prev.name}>{prev.name}</option>
-        )
-    })
-
+    ///Function called when the state tag dropdown is changed
     function handleChange(props){
         setEventFormInfo(prev => ({
             ...prev,
@@ -170,10 +167,6 @@ export default function EventsCreatePage(){
                         <div className="two-location-inputs">
                             <label className="form-label-location" htmlFor="location-state">State</label>
                             <Select onChange={handleChange} options={states} />
-
-                            {/* <select name="eventState" onChange={handleEventsFormChange}>
-                                {statesList}
-                            </select> */}
                         </div>
 
                         <label className="form-label-location" htmlFor="location-zip">Zip Code</label>

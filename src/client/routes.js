@@ -10,6 +10,7 @@ import TotalEventCardShown from "./components/TotalEventCardShown"
 export default function routes({routesInfo}){
 // console.log({routesInfo})
 
+  ///Adds all created paths for showing additional info with the event cards
   const eventsRoutes = routesInfo?.map((prevInfo) =>{
     return(
       <Route key={prevInfo._id} path={`/events/${prevInfo._id}`} element={<TotalEventCardShown />} />

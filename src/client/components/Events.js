@@ -21,8 +21,9 @@ useEffect(() =>{
     .catch(err => console.log(err))
 }, [])
 
-///maps event data to page
+    ///maps event data to page
     const events = eventCardInfo?.data?.map(item =>{
+        ///Shows all events
         if(stateTagSearch == undefined || stateTagSearch.label == "All Events"){
             counter++
             return(
@@ -32,6 +33,7 @@ useEffect(() =>{
                 />
             )            
         }
+        ///Shows events that are with the correct state tag
         if(stateTagSearch && item.eventState == stateTagSearch.label){
             counter++
             return(
@@ -41,19 +43,20 @@ useEffect(() =>{
                 />
             )            
         }else{
+            ///Shows no events because there are no states
             return null
         }
 
       })
 
-///Navigate to new page
+    ///Navigate to new page
     let navigate = useNavigate()
     const createEventsRouteChange = () =>{
         let path = "/eventsCreatePage"
         navigate(path)
     }
     
-
+///Makes loading look better
 if(!eventCardInfo) return null
 
     return(
