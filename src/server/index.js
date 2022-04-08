@@ -13,8 +13,6 @@ const app = express()
 const port = process.env.PORT || 5000
 
 
-
-
 app.use(cors({origin: "*"}))
 app.use(express.json())
 
@@ -40,17 +38,15 @@ app.use("/blogposts", blogpostsRouter)//when going to blogposts, it loads exerci
 app.use("/eventsinfo", eventsRouter)
 app.use("/addimage", imageRouter)
 app.use(bodyParser.json());
-///lets you use all files in the build folder
-app.use(express.static(path.join(__dirname, "../", "../", "build")));
+
+if (process.env.NODE_ENV === "production"){
+    app.use(express.static(path.join(__dirname, "../", "../", "build")));
+    app.get('/', (req,res) => {
+        res.sendFile(path.join(__dirname, "../", "../", "build","index.html"));
+    });
+}
 
 
-
-console.log(path.join(__dirname, "../", "../", "build","index.html"))
-
-
-app.get('/', (req,res) => {
-    res.sendFile(path.join(__dirname, "../", "../", "build","index.html"));
-});
 
 app.listen(port, () =>{
     console.log(`The server is running on port ${port}`)
