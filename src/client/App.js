@@ -16,13 +16,12 @@ function App() {
         messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
         appId: process.env.REACT_APP_FIREBASE_APP_ID,
         measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
-    
       };
 
   const app = initializeApp(firebaseConfig)
   const auth = getAuth(app);
   connectAuthEmulator(auth, "http://localhost:9099")
-
+  
 
   useEffect(() =>{
     axios.get("http://localhost:5000/eventsinfo")

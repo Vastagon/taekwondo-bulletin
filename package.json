@@ -7,6 +7,7 @@
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.26.0",
+    "body-parser": "^1.20.0",
     "bootstrap": "^5.1.3",
     "cloudinary": "^1.28.1",
     "cloudinary-react": "^1.7.1",
@@ -41,7 +42,8 @@
     "build": "react-scripts build",
     "client": "concurrently \"serve -s build\" \"\"npm run server",
     "start": "PORT=3000 react-scripts start",
-    "dev": "concurrently \"npm run server\" \"npm start\""
+    "dev": "concurrently \"npm run server\" \"npm start\"",
+    "sStart": "node server.bundle.js"
   },
   "eslintConfig": {
     "extends": [

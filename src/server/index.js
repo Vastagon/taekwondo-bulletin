@@ -3,6 +3,8 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 const path = require('path')
 const multer = require('multer')
+bodyParser = require("body-parser");
+
 
 
 require('dotenv').config();
@@ -15,7 +17,6 @@ const port = process.env.PORT || 5000
 
 app.use(cors({origin: "*"}))
 app.use(express.json())
-
 
 const uri = process.env.ATLAS_URI
 mongoose.connect(uri, {useNewUrlParser: true})
@@ -38,11 +39,18 @@ app.use("/blogposts", blogpostsRouter)//when going to blogposts, it loads exerci
 // app.use("/users", usersRouter)
 app.use("/eventsinfo", eventsRouter)
 app.use("/addimage", imageRouter)
+app.use(bodyParser.json());
+///lets you use all files in the build folder
+app.use(express.static(path.join(__dirname, "../", "../", "build")));
 
 
-console.log(path.join(__dirname, "../", "../", "build"))
-app.use(express.static(path.join(__dirname)));
 
+console.log(path.join(__dirname, "../", "../", "build","index.html"))
+
+
+app.get('/', (req,res) => {
+    res.sendFile(path.join(__dirname, "../", "../", "build","index.html"));
+});
 
 app.listen(port, () =>{
     console.log(`The server is running on port ${port}`)
