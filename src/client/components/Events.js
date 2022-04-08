@@ -8,7 +8,7 @@ import states from "./tagSearchStates.json"
 import Select from "react-select"
 import "../styles/Events.css"
 
-export default function Events({auth}){
+export default function Events({auth, dataURL}){
     const [eventCardInfo, setEventCardInfo] = useState()
     const [documentTitle, setDocumentTitle] = useState("Events")
     const [stateTagSearch, setStateTagSearch] = useState()
@@ -16,7 +16,7 @@ export default function Events({auth}){
 
 ///Gets data for events and sets the state of eventCardInfo
 useEffect(() =>{
-    axios.get("https://taekwondo-bulletin.herokuapp.com/eventsinfo")
+    axios.get(`${dataURL}/eventsinfo`)
     .then(res => setEventCardInfo(res))
     .catch(err => console.log(err))
 }, [])
@@ -61,7 +61,7 @@ if(!eventCardInfo) return null
 
     return(
         <div>
-            <Navbar auth={auth} documentTitle={documentTitle}/>
+            <Navbar dataURL={dataURL} auth={auth} documentTitle={documentTitle}/>
             <div className="events-tag-search">
                 <Select className="state-tag-dropdown" placeholder="State" onChange={setStateTagSearch} options={states} />
 

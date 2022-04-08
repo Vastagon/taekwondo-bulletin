@@ -3,12 +3,12 @@ import HomeSlider from "./components/HomeSlider";
 import "./styles/App.css"
 import { useState } from "react";
 
-export default function Home({auth}){
+export default function Home({dataURL, auth}){
     const [documentTitle, setDocumentTitle] = useState("Taekwondo Bulletin")
 
     return(
         <div>
-            <Navbar auth={auth} documentTitle={documentTitle}/>
+            <Navbar dataURL={dataURL} auth={auth} documentTitle={documentTitle}/>
             <HomeSlider />
             <h1>About</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 

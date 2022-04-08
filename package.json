@@ -42,7 +42,7 @@
     "build": "react-scripts build",
     "client": "concurrently \"serve -s build\" \"\"npm run server",
     "start": "node ./src/server/index.js",
-    "dev": "concurrently \"npm run server\" \"npm start\"",
+    "dev": "concurrently \"npm run server\" \"react-scripts start\"",
     "sStart": "node server.bundle.js"
   },
   "eslintConfig": {

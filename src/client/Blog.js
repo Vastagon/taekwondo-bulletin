@@ -4,14 +4,14 @@ import { useState, useEffect } from "react";
 import axios from 'axios';
 
 
-export default function Blog({auth}) {
+export default function Blog({auth, dataURL}) {
     const [blogPost, setBlogPost] = useState({postContent:""})
     const [showBlogPost, setShowBlogPost] = useState()
     const [documentTitle, setDocumentTitle] = useState("Blog")
     
     ///Gets the data from localhost and sets it to showBlogPost
     useEffect(() =>{
-      axios.get("https://taekwondo-bulletin.herokuapp.com/blogposts")
+      axios.get(`${dataURL}/blogposts`)
         .then(res => setShowBlogPost(res.data))
         .catch(err => console.log(err))
     }, [])
@@ -32,7 +32,7 @@ export default function Blog({auth}) {
       e.preventDefault()
 
       ///posts the blogPost object to localhost, which will post that data to mongodb
-      axios.post("https://taekwondo-bulletin.herokuapp.com/blogposts/add", blogPost)
+      axios.post(`${dataURL}/blogposts/add`, blogPost)
       .then(res => console.log(res.data))
       window.location.reload()
 
@@ -44,7 +44,7 @@ export default function Blog({auth}) {
 
       return(
           <div className="blog">
-              <Navbar auth={auth} documentTitle={documentTitle} />
+              <Navbar dataURL={dataURL} auth={auth} documentTitle={documentTitle} />
               <div className="all-blog-posts">
                 {writeBlogPostsToPage}
               </div>

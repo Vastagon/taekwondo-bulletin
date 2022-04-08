@@ -8,7 +8,7 @@ import DatePicker from "react-datepicker"
 import states from "./states.json"
 import Select from "react-select"
 
-export default function EventsCreatePage(){
+export default function EventsCreatePage({dataURL, auth}){
     const [eventFormInfo, setEventFormInfo] = useState({eventName:"",eventDescription:"", eventDate:new Date(), 
     eventImg:Math.random(0,20)+ new Date(), eventStreet: "", eventCity: "", eventState:""})
 
@@ -69,7 +69,7 @@ export default function EventsCreatePage(){
             eventImg: formData?.data?.public_id
         }))
 
-        axios.post("https://taekwondo-bulletin.herokuapp.com/eventsinfo/add", eventFormInfo)
+        axios.post(`${dataURL}/eventsinfo/add`, eventFormInfo)
         .then(res => console.log(res.data))
         ///Sets all values to zero and resets page
         document.getElementById("eventName").value = ""
@@ -105,7 +105,7 @@ export default function EventsCreatePage(){
 
     return(
         <div>
-            <Navbar documentTitle={documentTitle} />
+            <Navbar dataURL={dataURL} auth={auth} documentTitle={documentTitle} />
             <form onSubmit={createEventFormSubmit} className="create-events-form">
                 <div className="create-events-input">
                     <label className="form-label" htmlFor="eventName">Event Name</label>

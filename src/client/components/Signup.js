@@ -4,7 +4,7 @@ import {useState} from "react"
 import "../styles/SignupPage.css"
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
-export default function Signup({auth}){
+export default function Signup({auth, dataURL}){
     const [userInfo, setUserInfo] = useState({username:"", password:"", email:""})
     const [documentTitle, setDocumentTitle] = useState("Signup")
         
@@ -16,7 +16,7 @@ export default function Signup({auth}){
             alert("Passwords don't match")
         }else{
             ///Might get rid of this
-            axios.post("https://taekwondo-bulletin.herokuapp.com/users/add", userInfo)
+            axios.post(`${dataURL}/users/add`, userInfo)
             .then(res => console.log(res.data))
 
             ///Creates a new account with firebase function
@@ -44,7 +44,7 @@ export default function Signup({auth}){
 
     return(
         <div className="centered">
-            <Navbar documentTitle={documentTitle}/>
+            <Navbar dataURL={dataURL} documentTitle={documentTitle}/>
             <div className="signup-page">
                 <h1 className="signup-page-message">Welcome to Taekwondo Bulletin</h1>
                 <form onSubmit={submitSignup}>

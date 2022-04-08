@@ -7,6 +7,14 @@ import { getAuth, connectAuthEmulator } from "firebase/auth";
 
 function App() {
   const [eventCardInfo, setEventCardInfo] = useState()
+  let dataURL
+  ///Changes axios url for production or development
+  if(process.env.NODE_ENV === "production"){
+    dataURL = "https://taekwondo-bulletin.herokuapp.com"
+  }else{
+    dataURL = "http://localhost:3000"
+  }   
+
 
     const firebaseConfig = {
         apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -24,28 +32,17 @@ function App() {
   
 
   useEffect(() =>{
-    axios.get("https://taekwondo-bulletin.herokuapp.com/eventsinfo")
+    axios.get(`${dataURL}/eventsinfo`)
     .then(res => setEventCardInfo(res.data))
     .catch(err => console.log(err))
 }, [])
 
   return (
     <div>
-      <Routes auth={auth} routesInfo={eventCardInfo} />
+      <Routes dataURL={dataURL} auth={auth} routesInfo={eventCardInfo} />
     </div>
 
   );
 }
 
 export default App;
-
-
-///Firebase.json
-  // "emulators": {
-  //   "auth": {
-  //     "port": 9099
-  //   },
-  //   "ui": {
-  //     "enabled": true
-  //   }
-  // }
