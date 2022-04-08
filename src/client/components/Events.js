@@ -16,7 +16,7 @@ export default function Events({auth}){
 
 ///Gets data for events and sets the state of eventCardInfo
 useEffect(() =>{
-    axios.get("https://taekwondo-bulletin.herokuapp.com//eventsinfo")
+    axios.get("https://taekwondo-bulletin.herokuapp.com/eventsinfo")
     .then(res => setEventCardInfo(res))
     .catch(err => console.log(err))
 }, [])
