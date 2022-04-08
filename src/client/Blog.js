@@ -11,7 +11,7 @@ export default function Blog({auth}) {
     
     ///Gets the data from localhost and sets it to showBlogPost
     useEffect(() =>{
-      axios.get("http://localhost:5000/blogposts")
+      axios.get("https://taekwondo-bulletin.herokuapp.com/blogposts")
         .then(res => setShowBlogPost(res.data))
         .catch(err => console.log(err))
     }, [])
@@ -32,7 +32,7 @@ export default function Blog({auth}) {
       e.preventDefault()
 
       ///posts the blogPost object to localhost, which will post that data to mongodb
-      axios.post("http://localhost:5000/blogposts/add", blogPost)
+      axios.post("https://taekwondo-bulletin.herokuapp.com/blogposts/add", blogPost)
       .then(res => console.log(res.data))
       window.location.reload()
 

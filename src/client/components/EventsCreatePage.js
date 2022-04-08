@@ -69,7 +69,7 @@ export default function EventsCreatePage(){
             eventImg: formData?.data?.public_id
         }))
 
-        axios.post("http://localhost:5000/eventsinfo/add", eventFormInfo)
+        axios.post("https://taekwondo-bulletin.herokuapp.com/eventsinfo/add", eventFormInfo)
         .then(res => console.log(res.data))
         ///Sets all values to zero and resets page
         document.getElementById("eventName").value = ""

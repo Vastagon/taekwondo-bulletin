@@ -13,7 +13,7 @@ export default function HomeSlider(props){
 
     ///Sets imageData to res.data
     useEffect(() =>{
-        axios.get("http://localhost:5000/eventsinfo")
+        axios.get("https://taekwondo-bulletin.herokuapp.com/eventsinfo")
         .then(res => setImageData(res.data))
     }, [])
 

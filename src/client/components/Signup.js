@@ -16,7 +16,7 @@ export default function Signup({auth}){
             alert("Passwords don't match")
         }else{
             ///Might get rid of this
-            axios.post("http://localhost:5000/users/add", userInfo)
+            axios.post("https://taekwondo-bulletin.herokuapp.com/users/add", userInfo)
             .then(res => console.log(res.data))
 
             ///Creates a new account with firebase function
