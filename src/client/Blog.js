@@ -33,8 +33,8 @@ export default function Blog({auth, dataURL}) {
 
       ///posts the blogPost object to localhost, which will post that data to mongodb
       axios.post(`${dataURL}/blogposts/add`, blogPost)
-      .then(res => console.log(res.data))
-      window.location.reload()
+      // .then(res => console.log(res.data))
+      .then(window.location.reload())
 
     }
 
