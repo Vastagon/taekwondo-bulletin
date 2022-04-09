@@ -6,20 +6,20 @@ import axios from 'axios';
 
 export default function Blog({auth, dataURL}) {
     const [blogPost, setBlogPost] = useState({postContent:""})
-    const [showBlogPost, setShowBlogPost] = useState()
     const [documentTitle, setDocumentTitle] = useState("Blog")
-    
+    const [blogPostState, setBlogPostState] = useState()
+
     ///Gets the data from localhost and sets it to showBlogPost
-    useEffect(() =>{
       axios.get(`${dataURL}/blogposts`)
-        .then(res => setShowBlogPost(res.data))
+        .then(res => setBlogPostState(res.data))
         .catch(err => console.log(err))
-    }, [])
+
+
 
     ///writes all blog posts to page
-    const writeBlogPostsToPage = showBlogPost?.map(post =>{
-      return <p key={post._id} className="blog-entries">{post.postContent}</p>
-    })
+    // let writeBlogPostsToPage = showBlogPost?.map(post =>{
+    //   return <p key={post._id} className="blog-entries">{post.postContent}</p>
+    // })
 
     ///Changes the blogPost object to the text input
     function onChangeBlogPost(e){
@@ -33,12 +33,16 @@ export default function Blog({auth, dataURL}) {
 
       ///posts the blogPost object to localhost, which will post that data to mongodb
       axios.post(`${dataURL}/blogposts/add`, blogPost)
-      // .then(res => console.log(res.data))
-      .then(window.location.reload())
 
+      setBlogPost()
+      document.getElementById("blog-entry").value = ""
+
+      ///Gets data from blogposts again for rerender
+      axios.get(`${dataURL}/blogposts`)
+        .then(res => setBlogPostState(res.data))
     }
 
-    if(!showBlogPost){///Renders page after getting data
+    if(!blogPostState){///Renders page after getting data
       return null
     }
 
@@ -46,15 +50,13 @@ export default function Blog({auth, dataURL}) {
           <div className="blog">
               <Navbar dataURL={dataURL} auth={auth} documentTitle={documentTitle} />
               <div className="all-blog-posts">
-                {writeBlogPostsToPage}
+                {blogPostState.map(post => <p key={post._id} className="blog-entries">{post.postContent}</p>)}
               </div>
 
               <form onSubmit={onFormSubmit} id="blog-form" className="all-blog-data">
-                  <input required onChange={onChangeBlogPost} id="blog-entry" type="text" className="blog-entry" />
+                  <input minLength={5} required onChange={onChangeBlogPost} id="blog-entry" type="text" className="blog-entry" />
                   <button type="submit" id="blog-entry-submit-button">Submit</button>
               </form>
           </div>
       )
     }
-
-

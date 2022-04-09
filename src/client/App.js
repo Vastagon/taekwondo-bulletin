@@ -12,7 +12,7 @@ function App() {
   if(process.env.NODE_ENV === "production"){
     dataURL = "https://taekwondo-bulletin.herokuapp.com"
   }else{
-    dataURL = "http://localhost:3000"
+    dataURL = "http://localhost:5000"
   }   
 
 
