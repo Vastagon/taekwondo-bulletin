@@ -30,7 +30,7 @@
     height: 80%;
     display: grid;
     grid-template-rows: auto;
-    top: 10%;
+    top: 10vh;
     position: relative;
     z-index: 1;
     margin-bottom: 0;
@@ -42,5 +42,7 @@
 
 
 @media screen and (max-width: 500px) {
-    
+    .all-blog-posts{
+        top: 100px;
+    }
 }

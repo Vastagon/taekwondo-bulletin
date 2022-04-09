@@ -64,7 +64,6 @@ if(!eventCardInfo) return null
             <Navbar dataURL={dataURL} auth={auth} documentTitle={documentTitle}/>
             <div className="events-tag-search">
                 <Select className="state-tag-dropdown" placeholder="State" onChange={setStateTagSearch} options={states} />
-
                 <button className="new-event-button" onClick={createEventsRouteChange} >New Event</button>
             </div>
             <div className="event-list">

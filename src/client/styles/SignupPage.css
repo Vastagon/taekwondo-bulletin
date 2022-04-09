@@ -32,3 +32,10 @@
     margin-left: 1rem;
     margin-right: 1rem;
 }
+
+
+@media screen and (max-width: 450px) {
+    .signup-page{
+        width: 90%;
+    }
+}

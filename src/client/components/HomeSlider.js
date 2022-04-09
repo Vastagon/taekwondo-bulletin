@@ -2,7 +2,7 @@ import {useEffect, useState} from "react"
 import {Image} from "cloudinary-react"
 import axios from "axios"
 
-export default function HomeSlider(props){
+export default function HomeSlider({dataURL}){
     ///currentImage is the variable holding the index of the array
     const [currentImage, setCurrentImage] = useState(0)
     const [imageData, setImageData] = useState({})
@@ -10,11 +10,14 @@ export default function HomeSlider(props){
     const [clickedLeft, setClickedLeft] = useState()
     const [clickedRight, setClickedRight] = useState()
     let currentId = currentImage
+    const abortCont = new AbortController()
 
     ///Sets imageData to res.data
     useEffect(() =>{
-        axios.get("https://taekwondo-bulletin.herokuapp.com/eventsinfo")
+        axios.get(`${dataURL}/eventsinfo`, {signal: abortCont.signal})
         .then(res => setImageData(res.data))
+
+        return () => abortCont.abort()
     }, [])
 
     function clickRightArrowHome(){

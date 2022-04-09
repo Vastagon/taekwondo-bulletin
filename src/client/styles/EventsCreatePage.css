@@ -48,7 +48,8 @@
 }
 .dates-input{
     display: flex;
-
+    align-items: center;
+    justify-content: center;
 }
 .form-label{
     margin-left: 10%

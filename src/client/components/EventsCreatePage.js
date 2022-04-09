@@ -48,6 +48,7 @@ export default function EventsCreatePage({dataURL, auth}){
 ///Handles styling when an image is dropped
     useEffect(() =>{
         imageDropped()
+
     }, [eventFormInfo.eventImg])
 
     ///Function that is called when an image is dropped
@@ -187,7 +188,7 @@ export default function EventsCreatePage({dataURL, auth}){
                             6.1c.3.3.8.5 1.2.5.4 0 .9-.2 1.2-.5l10-11.6c.7-.7.7-1.7 0-2.4s-1.7-.7-2.4 0l-7.1 8.3v-25.3c0-.9-.7-1.7-1.7-1.7s-1.7.7-1.7 1.7v25.3l-7.1-8.3c-.7-.7-1.7-.7-2.4 0s-.7 1.7 0 2.4l10 11.6z"></path>
                             </svg>
                             }
-                            <p id="drag-file-text">Drag a file, or click the box</p>                            
+                            <p id="drag-file-text">Drag a file in, or click the box</p>                            
                         </div>
                     </div>
                     {/* <input required type="file" name="pdf" onChange={handleEventsFormChange}></input> */}
