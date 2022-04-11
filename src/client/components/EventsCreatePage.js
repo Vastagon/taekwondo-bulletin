@@ -23,9 +23,9 @@ export default function EventsCreatePage({dataURL, auth}){
     const [documentTitle, setDocumentTitle] = useState("Create New Event")
 
     ///formData for the cloudinary upload
-    formData.append("api_key", "336683864383724")
+    formData.append("api_key", process.env.REACT_APP_CLOUDINARY_API_KEY)
     formData.append("file", testImage.image)
-    formData.append("upload_preset", "zi4rfynp") 
+    formData.append("upload_preset", process.env.REACT_APP_UPLOAD_PRESET) 
     formData.append("public_id", eventFormInfo.eventImg)
 
     ///uses react dropzone to drop an image for the event

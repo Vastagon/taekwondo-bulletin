@@ -68,20 +68,21 @@ html,body{
   width: 5rem;
 }
 .event-image{
+  position: relative;
   width: 100vw;
   height: 90vh;
 }
 .event-slider-holder{
   display: flex;
-  width: 200vw;
+  margin-left: -100%;
+  width: 300%;
   height: 90vh;
 }
+.left-image{
 
-.previous-event-image{
-  display: none;
 }
-.future-event-image{
-  display: none;
+.right-image{
+
 }
 .slide-left{
   animation-name: imageSlideLeft;
@@ -159,6 +160,7 @@ html,body{
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 10;
 }
 
 .left-slider:hover, .right-slider:hover{
