@@ -1,4 +1,12 @@
 .total-event-card-shown{
     color: white;
     text-align: center;
+    margin-top: 10%;
+}
+
+
+@media screen and (max-width: 500px) {
+    .total-event-card-shown{
+        margin-top: 35%;
+    }
 }

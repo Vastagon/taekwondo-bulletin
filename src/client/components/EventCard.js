@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 
 
 export default function EventCard(props){
+    ///Maybe use later
+    let temp = props.item.eventName.replace(/ /g, "%")
+
     return(
         <Link className="single-card-link" to={`/events/${props.item._id}`} state={{ data: props.item }}>
             <div className="event-card">

@@ -7,16 +7,16 @@ import ErrorPage from './components/ErrorPage';
 import EventsCreatePage from "./components/EventsCreatePage"
 import TotalEventCardShown from "./components/TotalEventCardShown"
 
-export default function routes({auth, routesInfo, dataURL}){
-// console.log({routesInfo})
+export default function SetRoutes({auth, routesInfo, dataURL}){
+  ///Maybe use later
+    // let temp = routesInfo
+    // for(let i = 0; i < routesInfo?.length; i++){
+    //   temp[i].eventName = routesInfo[i]?.eventName.replace(/ /g, "%")
+    // }
 
-  ///Adds all created paths for showing additional info with the event cards
   const eventsRoutes = routesInfo?.map((prevInfo) =>{
-    return(
-      <Route key={prevInfo._id} path={`/events/${prevInfo._id}`} element={<TotalEventCardShown />} />
-    )
+    return <Route key={prevInfo._id} path={`/events/${prevInfo._id}`} element={<TotalEventCardShown />} />
   })
-
 
     return(
       <Router>
@@ -26,7 +26,6 @@ export default function routes({auth, routesInfo, dataURL}){
           <Route path="/events" element={<Events auth={auth} dataURL={dataURL} />} />
           <Route path="/signup" element={<Signup auth={auth} dataURL={dataURL} />} />
           <Route path="/eventsCreatePage" element={<EventsCreatePage auth={auth} dataURL={dataURL}/>} />
-          {/* <Route path={`/events/Text%20Area`} element={<TotalEventCardShown />} /> */}
           {eventsRoutes}
           <Route path="*" element={<ErrorPage />} />
         </Routes>

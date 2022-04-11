@@ -13,6 +13,8 @@ export default function EventsCreatePage({dataURL, auth}){
     const [eventFormInfo, setEventFormInfo] = useState({eventName:"",eventDescription:"", eventDate:new Date(), 
     eventImg:Math.random(0,20)+ new Date(), eventStreet: "", eventCity: "", eventState:""})
     let navigate = useNavigate();
+    const abortCont = new AbortController()
+
 
     // console.log(eventFormInfo)
     let formData = new FormData()
@@ -25,7 +27,7 @@ export default function EventsCreatePage({dataURL, auth}){
     formData.append("file", testImage.image)
     formData.append("upload_preset", "zi4rfynp") 
     formData.append("public_id", eventFormInfo.eventImg)
-    console.log(testImage.image)
+
     ///uses react dropzone to drop an image for the event
     const {getRootProps, getInputProps} = useDropzone({
         accept: "image/*",
@@ -43,9 +45,8 @@ export default function EventsCreatePage({dataURL, auth}){
     })
 ///Uploads image to cloudinary
     function uploadImage(){
-        axios.post("https://api.cloudinary.com/v1_1/zi4rfynp/image/upload", formData)
+        axios.post("https://api.cloudinary.com/v1_1/zi4rfynp/image/upload", formData, {signal: abortCont.signal})
     }
-
 
 ///Handles styling when an image is dropped
     useEffect(() =>{
@@ -72,7 +73,6 @@ export default function EventsCreatePage({dataURL, auth}){
         }))
         ///Posts eventsinfo data
         await axios.post(`${dataURL}/eventsinfo/add`, eventFormInfo)
-        .then(res => console.log(res.data))
 
         
         ///Sets eventImg in eventFormInfo to a new ID
@@ -82,8 +82,9 @@ export default function EventsCreatePage({dataURL, auth}){
         }))
         setDroppedImage(false)
 
-        navigate("/events")
-        // window.location.reload()
+        navigate(`/events`)
+        window.location.reload()
+
         // alert("Event Added")
     }
 

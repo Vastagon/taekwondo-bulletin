@@ -12,13 +12,16 @@ export default function Events({auth, dataURL}){
     const [eventCardInfo, setEventCardInfo] = useState()
     const [documentTitle, setDocumentTitle] = useState("Events")
     const [stateTagSearch, setStateTagSearch] = useState()
+    const abortCont = new AbortController()
     let counter = 0;
 
 ///Gets data for events and sets the state of eventCardInfo
 useEffect(() =>{
-    axios.get(`${dataURL}/eventsinfo`)
+    axios.get(`${dataURL}/eventsinfo`, {signal: abortCont.signal})
     .then(res => setEventCardInfo(res))
     .catch(err => console.log(err))
+
+    return () => abortCont.abort()
 }, [])
 
     ///maps event data to page

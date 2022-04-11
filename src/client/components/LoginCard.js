@@ -42,7 +42,7 @@ export default function LoginCard({auth}){
                 <input onChange={changeLoginInfo} className="login-text-password login-text" name="password" type="text" placeholder="Password" />
                 <div className="login-card-buttons">
                     <Link to="/signup">
-                    <button className="signup-button login-form-button">Sign up</button>
+                    <button type="button" className="signup-button login-form-button">Sign up</button>
                     </Link>
                     <button className="login-form-button" type="submit">Login</button>
                 </div>

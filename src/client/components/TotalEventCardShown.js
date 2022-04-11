@@ -1,11 +1,15 @@
 import { useLocation } from "react-router-dom";
 import "../styles/TotalEventCardShown.css"
+import Navbar from "./Navbar"
 
-export default function(){
+export default function({auth}){
     const location = useLocation()
     const data = location.state?.data///Gets card data
 
     return(
+    <>
+        <Navbar auth={auth}/>
+
         <div className="total-event-card-shown">
             <h1>{data.eventName}</h1>
             <p>{`Event Starts at: ${data.eventStartDate.substring(0,10)}`}</p>
@@ -19,5 +23,6 @@ export default function(){
             <p>{`Address: ${data.eventStreet}, ${data.eventCity}, ${data.eventState}, ${data.eventZip}`}</p>
 
         </div>
+    </>
     )
 }

@@ -90,6 +90,9 @@
 .date-picker{
     width: 65%;
 }
+.form-state-dropdown{
+    color: black;
+}
 
     /* Tablet Responsiveness */
 @media screen and (max-width: 800px) {
