@@ -10,7 +10,7 @@
     margin-top: 2vh;
     padding: 1rem;
     color: black;
-    height: 80%;
+    height: auto;
 }
 .event-list{
     display: grid;

@@ -2,11 +2,12 @@ import Navbar from "./components/Navbar"
 import "./styles/Blog.css"
 import { useState, useEffect } from "react";
 import axios from 'axios';
+import BlogEntry from "./components/BlogEntry";
 
 
 export default function Blog({auth, dataURL}) {
     const [blogPost, setBlogPost] = useState({postContent:""})
-    const [documentTitle, setDocumentTitle] = useState("Blog")
+    const [documentTitle] = useState("Blog")
     const [blogPostState, setBlogPostState] = useState()
     const abortCont = new AbortController()
 
@@ -42,7 +43,6 @@ export default function Blog({auth, dataURL}) {
         .catch(res => console.log(res.message))
     }
 
-    // console.log(blogPostState)
     if(!blogPostState){///Renders page after getting data
       return null
     }
@@ -50,8 +50,9 @@ export default function Blog({auth, dataURL}) {
       return(
           <div className="blog">
               <Navbar dataURL={dataURL} auth={auth} documentTitle={documentTitle} />
+
               <div className="all-blog-posts">
-                {blogPostState.map(post => <p key={post._id} className="blog-entries">{post.postContent}</p>)}
+                {blogPostState.map(post => <BlogEntry postContent={post} key={post._id}/>)}
               </div>
 
               <form onSubmit={onFormSubmit} id="blog-form" className="all-blog-data">

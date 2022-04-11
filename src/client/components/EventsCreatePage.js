@@ -3,6 +3,7 @@ import "../styles/EventsCreatePage.css"
 import "react-datepicker/dist/react-datepicker.css";
 import {useState, useEffect} from "react"
 import {useDropzone} from "react-dropzone"
+import {useNavigate} from "react-router-dom"
 import axios from "axios"
 import DatePicker from "react-datepicker"
 import states from "./states.json"
@@ -11,10 +12,11 @@ import Select from "react-select"
 export default function EventsCreatePage({dataURL, auth}){
     const [eventFormInfo, setEventFormInfo] = useState({eventName:"",eventDescription:"", eventDate:new Date(), 
     eventImg:Math.random(0,20)+ new Date(), eventStreet: "", eventCity: "", eventState:""})
+    let navigate = useNavigate();
 
     // console.log(eventFormInfo)
     let formData = new FormData()
-    const [droppedImage, setDroppedImage] = useState(true)
+    const [droppedImage, setDroppedImage] = useState(false)
     const [testImage, setTestImage] = useState({image: ""})
     const [documentTitle, setDocumentTitle] = useState("Create New Event")
 
@@ -23,7 +25,7 @@ export default function EventsCreatePage({dataURL, auth}){
     formData.append("file", testImage.image)
     formData.append("upload_preset", "zi4rfynp") 
     formData.append("public_id", eventFormInfo.eventImg)
-
+    console.log(testImage.image)
     ///uses react dropzone to drop an image for the event
     const {getRootProps, getInputProps} = useDropzone({
         accept: "image/*",
@@ -48,7 +50,6 @@ export default function EventsCreatePage({dataURL, auth}){
 ///Handles styling when an image is dropped
     useEffect(() =>{
         imageDropped()
-
     }, [eventFormInfo.eventImg])
 
     ///Function that is called when an image is dropped
@@ -61,7 +62,7 @@ export default function EventsCreatePage({dataURL, auth}){
     }
 
     ///Form submit handler
-    function createEventFormSubmit(e){
+    async function createEventFormSubmit(e){
         e.preventDefault()        
         uploadImage()
 
@@ -69,20 +70,21 @@ export default function EventsCreatePage({dataURL, auth}){
             ...prevInfo,
             eventImg: formData?.data?.public_id
         }))
-
-        axios.post(`${dataURL}/eventsinfo/add`, eventFormInfo)
+        ///Posts eventsinfo data
+        await axios.post(`${dataURL}/eventsinfo/add`, eventFormInfo)
         .then(res => console.log(res.data))
-        ///Sets all values to zero and resets page
-        document.getElementById("eventName").value = ""
-        document.getElementById("eventDescription").value = ""
 
+        
         ///Sets eventImg in eventFormInfo to a new ID
         setEventFormInfo(prevInfo => ({
             ...prevInfo,
             eventImg:Math.random(0,20)+ new Date()
         }))
         setDroppedImage(false)
-        // imageDropped()
+
+        navigate("/events")
+        // window.location.reload()
+        // alert("Event Added")
     }
 
     ///Changes the info in the eventFormInfo object when changed on page
@@ -107,21 +109,26 @@ export default function EventsCreatePage({dataURL, auth}){
     return(
         <div>
             <Navbar dataURL={dataURL} auth={auth} documentTitle={documentTitle} />
-            <form onSubmit={createEventFormSubmit} className="create-events-form">
+            <form autoComplete="off" onSubmit={createEventFormSubmit} className="create-events-form">
                 <div className="create-events-input">
-                    <label className="form-label" htmlFor="eventName">Event Name</label>
+                    <label className="form-label-input" htmlFor="eventName">Event Name</label>
                     <input required onChange={handleEventsFormChange} id="eventName" name="eventName" className="create-events-input" type="text" placeholder="Title"></input>
                 </div>
                 <div className="create-events-input">
-                    <label className="form-label" htmlFor="eventDescription">Event Description</label>
+                    <label className="form-label-input" htmlFor="eventDescription">Event Description</label>
                     <textarea id="eventDescription" required onChange={handleEventsFormChange} name="eventDescription" className="event-description create-events-input" type="textarea" placeholder="Description" ></textarea>
                 </div>
                 <div className="create-events-input">
-                    <label  className="form-label" htmlFor="eventOrganizer">Event Organizer</label>
+                    <label  className="form-label-input" htmlFor="eventOrganizer">Event Organizer</label>
                     <input id="eventOrganiser" required onChange={handleEventsFormChange} name="eventOrganizer" className="create-events-input" type="text" placeholder="Organizer" />
                 </div>
+
+
+
+
+
                 <div className="dates-input create-events-input">
-                    <div className="date-input-individual">
+                    <div className="date-input-left date-input-individual">
                         <label className="form-label" htmlFor="start-date-picker">Start Date</label>
                         <DatePicker required id="start-date-picker" className="date-picker" selected={eventFormInfo.eventStartDate} onChange={(date) => setEventFormInfo(prevInfo => ({
                             ...prevInfo,
@@ -152,26 +159,32 @@ export default function EventsCreatePage({dataURL, auth}){
                         }))} />                    
                     </div>
                 </div>
+
+
+
+
+
                 <div className="form-location">
-                    <div className="create-events-input">
-                        <div className="two-location-inputs">
+                    <div className="create-events-input-location">
+                        <div className="first two-location-inputs">
                             <label className="form-label-location" htmlFor="location-street">Street</label>
-                            <input required onChange={handleEventsFormChange} type="text" id="location-street" name="eventStreet" placeholder="Street"></input>
-
+                            <input className="form-input-location" required onChange={handleEventsFormChange} type="text" id="location-street" name="eventStreet" placeholder="Street"></input>
                         </div>
-
-                        <label className="form-label-location" htmlFor="location-city">City</label>
-                        <input required onChange={handleEventsFormChange} type="text" id="location-city" name="eventCity" placeholder="City"></input>
+                        <div className="two-location-inputs">
+                            <label className="form-label-location" htmlFor="location-city">City</label>
+                            <input className="form-input-location" required onChange={handleEventsFormChange} type="text" id="location-city" name="eventCity" placeholder="City"></input>
+                        </div>
 
                     </div>
-                    <div className="create-events-input">
-                        <div className="two-location-inputs">
+                    <div className="create-events-input-location">
+                        <div className="first two-location-inputs">
                             <label className="form-label-location" htmlFor="location-state">State</label>
-                            <Select onChange={handleChange} options={states} />
+                            <Select className="form-state-dropdown" onChange={handleChange} options={states} />
                         </div>
-
-                        <label className="form-label-location" htmlFor="location-zip">Zip Code</label>
-                        <input required onChange={handleEventsFormChange} type="text" id="location-zip" name="eventZip" placeholder="Zip Code"></input>
+                        <div className="two-location-inputs">
+                            <label className="form-label-location" htmlFor="location-zip">Zip Code</label>
+                            <input className="form-input-location" required onChange={handleEventsFormChange} type="text" id="location-zip" name="eventZip" placeholder="Zip Code"></input>
+                        </div>
                     </div>
                 </div>
   
