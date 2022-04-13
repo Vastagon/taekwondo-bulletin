@@ -116,4 +116,21 @@
     .two-location-inputs{
         position: relative;
     }
+    .create-events-form{
+        margin-left: 5%;
+        width: 90%;
+    }
+    .date-input-left, .date-input-right, .date-input-individual{
+        margin-left: 25%;
+        margin-right: 25%;
+    }
+    .events-form-submit{
+        margin-top: 16%;
+    }
+}
+@media screen and (max-width: 500px) {
+    .events-form-submit{
+        margin-right: 5%;
+        margin-left: 15%;
+    }
 }

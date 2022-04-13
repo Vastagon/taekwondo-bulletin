@@ -11,11 +11,20 @@ export default function Blog({auth, dataURL}) {
     const [blogPostState, setBlogPostState] = useState()
     const abortCont = new AbortController()
 
+
     ///Gets the data from localhost and sets it to showBlogPost
     useEffect(() =>{
       axios.get(`${dataURL}/blogposts`, {signal: abortCont.signal})
         .then(res => setBlogPostState(res.data))
         .catch(err => console.log(err))
+
+        if(auth?.currentUser){
+          setBlogPost(prevBlog => ({
+            ...prevBlog,
+            postUserEmail: auth.currentUser.email,
+            postUsername: auth.currentUser.displayName
+          }))
+        }
 
         return () => abortCont.abort()
     }, [])
@@ -23,7 +32,10 @@ export default function Blog({auth, dataURL}) {
     ///Changes the blogPost object to the text input
     function onChangeBlogPost(e){
       e.preventDefault()
-      setBlogPost({postContent: e.target.value})
+      setBlogPost(prev => ({
+        ...prev,
+        postContent: e.target.value
+      }))
     }
 
     ///Happens whenever the user submits a post
@@ -32,8 +44,8 @@ export default function Blog({auth, dataURL}) {
 
       ///posts the blogPost object to localhost, which will post that data to mongodb
       await axios.post(`${dataURL}/blogposts/add`, blogPost)
-      .then(console.log(blogPost))
 
+      
       setBlogPost()
       document.getElementById("blog-entry").value = ""
 
@@ -52,13 +64,15 @@ export default function Blog({auth, dataURL}) {
               <Navbar dataURL={dataURL} auth={auth} documentTitle={documentTitle} />
 
               <div className="all-blog-posts">
-                {blogPostState.map(post => <BlogEntry postContent={post} key={post._id}/>)}
+                {blogPostState.map(post => <BlogEntry auth={auth} postContent={post} key={post._id}/>)}
               </div>
 
+          
               <form onSubmit={onFormSubmit} id="blog-form" className="all-blog-data">
-                  <input minLength={5} required onChange={onChangeBlogPost} placeholder="Post a Message" id="blog-entry" type="text" className="blog-entry" />
+                  <input minLength={5} required onChange={onChangeBlogPost} placeholder="Post a Message" id="blog-entry" type="text" className="blog-entry-input" />
                   <button type="submit" id="blog-entry-submit-button">Submit</button>
               </form>
+
           </div>
       )
     }

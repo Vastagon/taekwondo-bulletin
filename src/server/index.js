@@ -28,7 +28,6 @@ connection.once('open', () =>{///once connection is open
 // const exercisesRouter = require('./routes/exercises')
 // const usersRouter = require('./routes/users')
 const blogpostsRouter = require("./routes/blogposts")
-// const usersRouter = require('./routes/users')
 const eventsRouter = require('./routes/events')
 const imageRouter = require("./routes/image")
 

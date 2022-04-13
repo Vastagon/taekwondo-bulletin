@@ -217,13 +217,13 @@ html,body{
 }
 
 
-
+/* Animations */
 @keyframes imageSlideRight {
   from{
     transform: translateX(0%);
   }
   to{
-    transform: translateX(200%);
+    transform: translateX(33.3333%);
   }
 }
 @keyframes imageSlideLeft {
@@ -231,7 +231,7 @@ html,body{
     transform: translateX(0%);
   }
   to{
-    transform: translateX(-200%);
+    transform: translateX(-33.3333%);
   }
 }
 
@@ -259,13 +259,20 @@ html,body{
     right: 9.5rem;
     width: 2rem;
   }
+  .logout-button{
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 10%;
+    padding: 10px;
+  }
+
 }
 
  /* Mobile Styling */
 @media screen and (max-width: 500px) {
   .navbar{
     width: 100vw;
-    height: 10vh;
+    height: 10%;
     top: 0;
     left: 0;
     position: fixed;

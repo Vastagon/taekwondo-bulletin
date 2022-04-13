@@ -10,9 +10,13 @@ router.route('/').get((req,res) =>{
 ///When getting a post request at /add, it's expecting all 4 pieces of data
 router.route('/add').post((req,res) =>{
     const postContent = req.body.postContent
+    const postUserEmail = req.body.postUserEmail
+    const postUsername = req.body.postUsername
 
     const newBlogpost = new BlogPost({
         postContent,
+        postUserEmail,
+        postUsername
     })
 
     newBlogpost.save()///Mongoose again

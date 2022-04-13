@@ -22,6 +22,7 @@ export default function({auth}){
 
             <p>{`Address: ${data.eventStreet}, ${data.eventCity}, ${data.eventState}, ${data.eventZip}`}</p>
 
+            <p>{data.eventDescription}</p>
         </div>
     </>
     )

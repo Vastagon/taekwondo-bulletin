@@ -43,10 +43,6 @@ export default function EventsCreatePage({dataURL, auth}){
             reader.readAsDataURL(imageResult)
         }
     })
-///Uploads image to cloudinary
-    function uploadImage(){
-        axios.post("https://api.cloudinary.com/v1_1/zi4rfynp/image/upload", formData, {signal: abortCont.signal})
-    }
 
 ///Handles styling when an image is dropped
     useEffect(() =>{
@@ -65,8 +61,11 @@ export default function EventsCreatePage({dataURL, auth}){
     ///Form submit handler
     async function createEventFormSubmit(e){
         e.preventDefault()        
-        uploadImage()
 
+        ///Uploads image to cloudinary
+        await axios.post("https://api.cloudinary.com/v1_1/zi4rfynp/image/upload", formData, {signal: abortCont.signal})
+
+        
         setEventFormInfo((prevInfo) => ({
             ...prevInfo,
             eventImg: formData?.data?.public_id
@@ -84,8 +83,6 @@ export default function EventsCreatePage({dataURL, auth}){
 
         navigate(`/events`)
         window.location.reload()
-
-        // alert("Event Added")
     }
 
     ///Changes the info in the eventFormInfo object when changed on page

@@ -10,13 +10,13 @@
     margin-top: 2vh;
     padding: 1rem;
     color: black;
-    height: auto;
+    height: 50vh;
 }
 .event-list{
     display: grid;
     position: absolute;
     top: 20vh;
-    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-columns: 33% 33% 33%;
     width: 100%;
 }
 .event-name{
@@ -24,6 +24,21 @@
 }
 .event-description{
     margin-top: 1.5rem;
+    overflow: hidden;  
+    max-height: 15%;
+    width: 15%;
+}
+.event-state{
+    margin-top: 1rem;
+}
+.bottom-card{
+    position: relative;
+    bottom: 5%;
+    left: 0%;
+    margin-top: 10%;
+}
+.bottom-card > p{
+    margin: 0;
 }
 .single-card-link{
     text-decoration: none;
@@ -56,6 +71,10 @@
     text-align: center;
     width: 100vw;
 }
+
+
+
+
 
 @media screen and (max-width: 850px) {
     .event-list{
