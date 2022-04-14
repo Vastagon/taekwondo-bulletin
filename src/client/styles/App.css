@@ -51,7 +51,7 @@ html,body{
 .loggedin-email{
   font-size: 1rem;
 }
-.events-tab:hover::before, .login-tab:hover::before, .blog-tab:hover::before{
+/* .events-tab:hover::before, .login-tab:hover::before, .blog-tab:hover::before{
   position: fixed;
   left: auto;
   top: 9.6%;
@@ -66,7 +66,7 @@ html,body{
 .events-tab:hover::before{
   right: 9rem;
   width: 5rem;
-}
+} */
 .event-image{
   position: relative;
   width: 100vw;
@@ -77,12 +77,6 @@ html,body{
   margin-left: -100%;
   width: 300%;
   height: 90vh;
-}
-.left-image{
-
-}
-.right-image{
-
 }
 .slide-left{
   animation-name: imageSlideLeft;
@@ -301,9 +295,6 @@ html,body{
     height: 90vh;
     z-index: 10;
   }
-  .nav-right{
-
-  }
   .nav-tabs{
     font-size: 2rem;
     margin-top: 2rem;
@@ -342,8 +333,8 @@ html,body{
   .login-form-button{
     position: absolute;
     right: 10%;
-    margin-top: 2rem;
-    padding: .8rem 1rem;
+    margin-top: 3%;
+    padding: 3% 6%;
     border-radius: 30px;
     border-style: hidden;
     width: 30%;

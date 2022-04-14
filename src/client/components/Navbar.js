@@ -42,7 +42,7 @@ export default function Header({auth, documentTitle}){
         window.location.reload()    
     }
    
-    console.log(auth?.currentUser)
+    // console.log(auth?.currentUser)
     return(//shows header and login card
         <div className="navbar"> 
             <img alt="Cannot find Image" onClick={goHome} className="logo" src={tkdbImage} />
@@ -53,14 +53,15 @@ export default function Header({auth, documentTitle}){
                 <div className="nav--right">
                     <Link to="/blog" className="desktop-navbar blog-tab nav-tabs">Blog</Link>
                     <Link to="/events" className="desktop-navbar events-tab nav-tabs">Events</Link>
-                    {auth?.currentUser ? <p className="loggedin-email desktop-navbar nav-tabs">{auth?.currentUser?.email}</p> :<h4 onClick={loginClickListener} className="desktop-navbar login-tab nav-tabs">Login</h4>}
+                    {auth?.currentUser ? <p className="loggedin-email desktop-navbar nav-tabs">{auth?.currentUser?.displayName ? auth?.currentUser?.displayName : auth?.currentUser?.email}</p> :<h4 onClick={loginClickListener} className="desktop-navbar login-tab nav-tabs">Login</h4>}
                     {auth?.currentUser ? <button onClick={handleSignOut}>Sign Out</button> : null}
                 </div>
-                : 
+                :
+            // Phone Nav 
                 <img onClick={showHamNavFunction} className="nav-hamburger nav--right" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/1024px-Hamburger_icon.svg.png" alt="not here" />}
             <div id="nav-ham" className="nav-ham">
-                {auth?.currentUser ? <p className="nav-tabs">{auth?.currentUser?.email}</p> : null}
-                <h4 onClick={loginClickListener} className="login-tab nav-tabs">Login</h4>
+                {auth?.currentUser ? <p className="nav-tabs">{auth?.currentUser?.displayName ? auth?.currentUser?.displayName : auth?.currentUser?.email}</p> : null}
+                {auth?.currentUser ? null : <h4 onClick={loginClickListener} className="login-tab nav-tabs">Login</h4>}
                 <Link to="/blog" className="blog-tab nav-tabs">Blog</Link>
                 <Link to="/events" className="events-tab nav-tabs">Events</Link>
                 {auth?.currentUser ? <button className="logout-button" onClick={handleSignOut}>Sign Out</button> : null}

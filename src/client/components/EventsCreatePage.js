@@ -15,8 +15,6 @@ export default function EventsCreatePage({dataURL, auth}){
     let navigate = useNavigate();
     const abortCont = new AbortController()
 
-
-    // console.log(eventFormInfo)
     let formData = new FormData()
     const [droppedImage, setDroppedImage] = useState(false)
     const [testImage, setTestImage] = useState({image: ""})
@@ -51,11 +49,11 @@ export default function EventsCreatePage({dataURL, auth}){
 
     ///Function that is called when an image is dropped
     function imageDropped(){
-        if(!droppedImage){
-            document.getElementById('drag-file-text').style.display = "none"
-        }else{
-            document.getElementById('drag-file-text').style.display = "absolute"
-        }
+        // if(droppedImage){
+        //     document.getElementById('drag-file-text').style.display = "none"
+        // }else{
+        //     document.getElementById('drag-file-text').style.display = "absolute"
+        // }
     }
 
     ///Form submit handler
@@ -65,7 +63,7 @@ export default function EventsCreatePage({dataURL, auth}){
         ///Uploads image to cloudinary
         await axios.post("https://api.cloudinary.com/v1_1/zi4rfynp/image/upload", formData, {signal: abortCont.signal})
 
-        
+        ///Adds eventImg id for getting from cloudinary
         setEventFormInfo((prevInfo) => ({
             ...prevInfo,
             eventImg: formData?.data?.public_id
@@ -92,8 +90,6 @@ export default function EventsCreatePage({dataURL, auth}){
             [e.target.name]: e.target.value,
             value: e.target.value
         }))
-        
-        // console.log(Array.from(formData))
     }
 
     ///Function called when the state tag dropdown is changed
@@ -107,6 +103,7 @@ export default function EventsCreatePage({dataURL, auth}){
     return(
         <div>
             <Navbar dataURL={dataURL} auth={auth} documentTitle={documentTitle} />
+            {/* Event Info */}
             <form autoComplete="off" onSubmit={createEventFormSubmit} className="create-events-form">
                 <div className="create-events-input">
                     <label className="form-label-input" htmlFor="eventName">Event Name</label>
@@ -124,7 +121,7 @@ export default function EventsCreatePage({dataURL, auth}){
 
 
 
-
+                {/* Event Date */}
                 <div className="dates-input create-events-input">
                     <div className="date-input-left date-input-individual">
                         <label className="form-label" htmlFor="start-date-picker">Start Date</label>
@@ -141,6 +138,7 @@ export default function EventsCreatePage({dataURL, auth}){
                         }))} />                    
                     </div>
                 </div>
+                {/* Registration Date */}
                 <div className="dates-input create-events-input">
                     <div className="date-input-individual">
                         <label className="form-label" htmlFor="registration-start-date-picker">Registration Opens</label>
@@ -161,7 +159,7 @@ export default function EventsCreatePage({dataURL, auth}){
 
 
 
-
+                {/* Location Form */}
                 <div className="form-location">
                     <div className="create-events-input-location">
                         <div className="first two-location-inputs">
@@ -187,6 +185,7 @@ export default function EventsCreatePage({dataURL, auth}){
                 </div>
   
 
+                {/* Drop Image */}
                 <div className="form-bottom-row">
                     <div className="img-drop">
                         <div {...getRootProps()}>
@@ -199,8 +198,9 @@ export default function EventsCreatePage({dataURL, auth}){
                             6.1c.3.3.8.5 1.2.5.4 0 .9-.2 1.2-.5l10-11.6c.7-.7.7-1.7 0-2.4s-1.7-.7-2.4 0l-7.1 8.3v-25.3c0-.9-.7-1.7-1.7-1.7s-1.7.7-1.7 1.7v25.3l-7.1-8.3c-.7-.7-1.7-.7-2.4 0s-.7 1.7 0 2.4l10 11.6z"></path>
                             </svg>
                             }
-                            <p id="drag-file-text">Drag a file in, or click the box</p>                            
                         </div>
+                        {/* <p id="drag-file-text">Drag a file in, or click the box</p>                             */}
+
                     </div>
                     {/* <input required type="file" name="pdf" onChange={handleEventsFormChange}></input> */}
 

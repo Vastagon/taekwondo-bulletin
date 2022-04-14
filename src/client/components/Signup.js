@@ -1,5 +1,4 @@
 import Navbar from "./Navbar"
-import axios from 'axios';
 import {useState} from "react"
 import "../styles/SignupPage.css"
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
@@ -23,12 +22,10 @@ export default function Signup({auth, dataURL}){
                 })
             })
         
-            
             ///Handles errors
             .catch((error) => console.log(error))
 
-
-            // window.location.reload()
+            window.location.reload()
         }
     
     }
