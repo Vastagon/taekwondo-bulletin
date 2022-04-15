@@ -2,12 +2,13 @@ import tkdbImage from "../images/overlap.png"
 import LoginCard from "./LoginCard"
 import {useEffect, useState} from "react"
 import {Link, useNavigate} from "react-router-dom"
-import { signOut } from "firebase/auth";
+import { signOut, onAuthStateChanged } from "firebase/auth";
 
 export default function Header({auth, documentTitle}){
     const [showHamNav, setShowHamNav] = useState(true)
     const [windowWidth, setWindowWidth] = useState(window.innerWidth)
     const [showLogin, setShowLogin] = useState(false)
+
     let navigate = useNavigate();
 
     window.addEventListener("resize", ()=>{
@@ -43,6 +44,9 @@ export default function Header({auth, documentTitle}){
     }
    
     // console.log(auth?.currentUser)
+
+
+
     return(//shows header and login card
         <div className="navbar"> 
             <img alt="Cannot find Image" onClick={goHome} className="logo" src={tkdbImage} />
@@ -68,4 +72,6 @@ export default function Header({auth, documentTitle}){
             </div>
         </div>
     )
+  
+
 }

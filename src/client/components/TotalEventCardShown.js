@@ -2,27 +2,27 @@ import { useLocation } from "react-router-dom";
 import "../styles/TotalEventCardShown.css"
 import Navbar from "./Navbar"
 
-export default function({auth}){
-    const location = useLocation()
-    const data = location.state?.data///Gets card data
+export default function({auth, info}){
+    ///info is passed in from SetRoutes
+
 
     return(
     <>
         <Navbar auth={auth}/>
 
         <div className="total-event-card-shown">
-            <h1>{data.eventName}</h1>
-            <p>{`Event Starts at: ${data.eventStartDate.substring(0,10)}`}</p>
-            <p>{`Event Ends at: ${data.eventEndDate.substring(0,10)}`}</p>
+            <h1>{info.eventName}</h1>
+            <p>{`Event Starts at: ${info.eventStartDate.substring(0,10)}`}</p>
+            <p>{`Event Ends at: ${info.eventEndDate.substring(0,10)}`}</p>
 
-            <p>{`Event Registration Starts at: ${data.eventRegStartDate.substring(0,10)}`}</p>
-            <p>{`Event Registration Ends at: ${data.eventRegEndDate.substring(0,10)}`}</p>
+            <p>{`Event Registration Starts at: ${info.eventRegStartDate.substring(0,10)}`}</p>
+            <p>{`Event Registration Ends at: ${info.eventRegEndDate.substring(0,10)}`}</p>
 
-            <p>{`Organizer: ${data.eventOrganizer}`}</p>
+            <p>{`Organizer: ${info.eventOrganizer}`}</p>
 
-            <p>{`Address: ${data.eventStreet}, ${data.eventCity}, ${data.eventState}, ${data.eventZip}`}</p>
+            <p>{`Address: ${info.eventStreet}, ${info.eventCity}, ${info.eventState}, ${info.eventZip}`}</p>
 
-            <p>{data.eventDescription}</p>
+            <p>{info.eventDescription}</p>
         </div>
     </>
     )

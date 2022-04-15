@@ -1,10 +1,8 @@
 import {Image} from "cloudinary-react"
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 
 export default function EventCard(props){
-    ///Maybe use later
-    let temp = props.item.eventName.replace(/ /g, "%")
 
     return(
         <Link className="single-card-link" to={`/events/${props.item._id}`} state={{ data: props.item }}>
@@ -18,6 +16,7 @@ export default function EventCard(props){
                     <p className="event-register">{`Register by: ${props?.item?.eventRegEndDate?.toString().substring(0,10)}`}</p>
                     <p className="event-state">State: {props?.item?.eventState}</p>
                 </div>
+
             </div>         
         </Link>   
     )

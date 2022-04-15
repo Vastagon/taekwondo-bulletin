@@ -14,14 +14,12 @@ export default function LoginCard({auth}){
         signInWithEmailAndPassword(auth, loginInfo.email, loginInfo.password)
         .then((userCredential) => {
             const user = userCredential.user
-            console.log(user)
             window.location.reload()
 
         })
         ///Handles errors
         .catch((error) =>{
-            const errorCode = error.code
-            const errorMessage = error.message
+            alert("Invalid Username or password")
         })
 
     }

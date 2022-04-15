@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useParams } from 'react-router-dom';
 import Home from "./Home"
 import Blog from "./Blog"
 import Events from './components/Events';
@@ -15,8 +15,9 @@ export default function SetRoutes({auth, routesInfo, dataURL}){
     // }
 
   const eventsRoutes = routesInfo?.map((prevInfo) =>{
-    return <Route key={prevInfo._id} path={`/events/${prevInfo._id}`} element={<TotalEventCardShown />} />
+    return <Route key={prevInfo._id} path={`/events/${prevInfo._id}`} element={<TotalEventCardShown info={prevInfo}/>} />
   })
+
 
     return(
       <Router>
@@ -27,6 +28,7 @@ export default function SetRoutes({auth, routesInfo, dataURL}){
           <Route path="/signup" element={<Signup auth={auth} dataURL={dataURL} />} />
           <Route path="/eventsCreatePage" element={<EventsCreatePage auth={auth} dataURL={dataURL}/>} />
           {eventsRoutes}
+          {/* <Route path="/events/:id" element={<TotalEventCardShown data={this.state.data}/>} /> */}
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </Router>

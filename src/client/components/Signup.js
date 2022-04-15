@@ -17,15 +17,19 @@ export default function Signup({auth, dataURL}){
             ///Creates a new account with firebase function
             createUserWithEmailAndPassword(auth, userInfo.email, userInfo.password)
             .then(result =>{
+                ///Gives profile a username
                 updateProfile(auth.currentUser, {
                     displayName: userInfo.username
                 })
+                window.location.reload()
             })
         
             ///Handles errors
-            .catch((error) => console.log(error))
+            .catch((error) => {
+                console.log(error)
+                alert(error.message)
+            })
 
-            window.location.reload()
         }
     
     }

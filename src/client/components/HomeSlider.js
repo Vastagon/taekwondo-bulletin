@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react"
 import {Image} from "cloudinary-react"
 import axios from "axios" 
-
+import {useNavigate, Link} from "react-router-dom"
 
 export default function HomeSlider({dataURL}){
     ///currentImage is the variable holding the index of the array
@@ -11,6 +11,7 @@ export default function HomeSlider({dataURL}){
     const [leftImage, setLeftImage] = useState()
     const [rightImage, setRightImage] = useState()
     const abortCont = new AbortController()
+    const navigate = useNavigate()
 
     ///Sets imageData to res.data
     useEffect(() =>{
@@ -24,6 +25,12 @@ export default function HomeSlider({dataURL}){
 
         return () => abortCont.abort()
     }, [])    
+
+
+    function centerImageClicked(){
+        navigate(`/events`)
+        navigate(`/events/${imageData[currentImage]?._id}`)
+    }
 
 
     function clickRightArrowHome(){
@@ -114,7 +121,9 @@ export default function HomeSlider({dataURL}){
                 {/* Displayed when Right Clicked */}
                     <Image id="left-image" alt="Cannot find Image" className="event-image" cloud_name={process.env.REACT_APP_CLOUD_NAME} publicId={imageData[leftImage]?.eventImg} />
                 {/* Middle Image */}
-                    <Image id="center-image" alt="Cannot find Image" className="event-image" cloud_name={process.env.REACT_APP_CLOUD_NAME} publicId={imageData[currentImage]?.eventImg} />
+                <Link to={`/events/${imageData[currentImage]?._id}`} state={{ data: imageData[currentImage] }}>
+                    <Image onClick={centerImageClicked} id="center-image" alt="Cannot find Image" className="event-image" cloud_name={process.env.REACT_APP_CLOUD_NAME} publicId={imageData[currentImage]?.eventImg} />
+                </Link>
                 {/* Displayed when Left Clicked */}
                     <Image id="right-image" alt="Cannot find Image" className="event-image" cloud_name={process.env.REACT_APP_CLOUD_NAME} publicId={imageData[rightImage]?.eventImg} />
             </div>

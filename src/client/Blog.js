@@ -6,12 +6,14 @@ import BlogEntry from "./components/BlogEntry";
 
 
 export default function Blog({auth, dataURL}) {
+  ///I'm posting blogpost
     const [blogPost, setBlogPost] = useState({postContent:""})
     const [documentTitle] = useState("Blog")
+    ///I'm showing blogPostState on the page
     const [blogPostState, setBlogPostState] = useState()
     const abortCont = new AbortController()
 
-
+  console.log(auth)
     ///Gets the data from localhost and sets it to showBlogPost
     useEffect(() =>{
       axios.get(`${dataURL}/blogposts`, {signal: abortCont.signal})
@@ -46,7 +48,10 @@ export default function Blog({auth, dataURL}) {
       await axios.post(`${dataURL}/blogposts/add`, blogPost)
 
       
-      setBlogPost()
+      setBlogPost(prevBlogInfo => ({
+        ...prevBlogInfo,
+        postContent: ""
+      }))
       document.getElementById("blog-entry").value = ""
 
       ///Gets data from blogposts again for rerender
@@ -58,7 +63,7 @@ export default function Blog({auth, dataURL}) {
     if(!blogPostState){///Renders page after getting data
       return null
     }
-
+      console.log(blogPost)
       return(
           <div className="blog">
               <Navbar dataURL={dataURL} auth={auth} documentTitle={documentTitle} />

@@ -288,7 +288,7 @@ html,body{
     position: absolute;
     flex-direction: column;
     right: 0;
-    top: 10vh;
+    top: 100%;
     text-align: center;
     background-color: #1a1f26;
     width: 100%;
