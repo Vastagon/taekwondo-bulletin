@@ -3,30 +3,38 @@ import "./styles/Blog.css"
 import { useState, useEffect } from "react";
 import axios from 'axios';
 import BlogEntry from "./components/BlogEntry";
+import {getAuth, onAuthStateChanged} from "firebase/auth"
 
 
-export default function Blog({auth, dataURL}) {
+export default function Blog({dataURL}) {
   ///I'm posting blogpost
-    const [blogPost, setBlogPost] = useState({postContent:""})
+    const [blogPost, setBlogPost] = useState({postContent:"", postUserEmail:"", postUsername:""})
     const [documentTitle] = useState("Blog")
     ///I'm showing blogPostState on the page
     const [blogPostState, setBlogPostState] = useState()
     const abortCont = new AbortController()
+    const [userState, setUserState] = useState()
 
-  console.log(auth)
+
+    useEffect(() => {
+      const auth = getAuth()
+      onAuthStateChanged(auth, (user) =>{
+          if(user){
+            setBlogPost(prevBlog => ({
+              ...prevBlog,
+              postUserEmail: user.email,
+              postUsername: user.displayName
+            }))
+            setUserState(user)
+          }
+      })
+    }, [])
+
     ///Gets the data from localhost and sets it to showBlogPost
     useEffect(() =>{
       axios.get(`${dataURL}/blogposts`, {signal: abortCont.signal})
         .then(res => setBlogPostState(res.data))
         .catch(err => console.log(err))
-
-        if(auth?.currentUser){
-          setBlogPost(prevBlog => ({
-            ...prevBlog,
-            postUserEmail: auth.currentUser.email,
-            postUsername: auth.currentUser.displayName
-          }))
-        }
 
         return () => abortCont.abort()
     }, [])
@@ -60,16 +68,18 @@ export default function Blog({auth, dataURL}) {
         .catch(res => console.log(res.message))
     }
 
-    if(!blogPostState){///Renders page after getting data
-      return null
-    }
-      console.log(blogPost)
-      return(
+    console.log(blogPost)
+
+
+    if(!blogPostState) return null
+
+
+    return(
           <div className="blog">
-              <Navbar dataURL={dataURL} auth={auth} documentTitle={documentTitle} />
+              <Navbar dataURL={dataURL} documentTitle={documentTitle} />
 
               <div className="all-blog-posts">
-                {blogPostState.map(post => <BlogEntry auth={auth} postContent={post} key={post._id}/>)}
+                {blogPostState.map(post => <BlogEntry postContent={post} key={post._id}/>)}
               </div>
 
           

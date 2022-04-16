@@ -39,7 +39,6 @@ function App() {
     .catch(err => console.log(err))
   }, [])
 
-  console.log(auth)
   return (
     <div>
       <Routes dataURL={dataURL} auth={auth} routesInfo={eventCardInfo} />
