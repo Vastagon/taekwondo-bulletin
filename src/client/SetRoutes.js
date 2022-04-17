@@ -6,13 +6,10 @@ import Signup from "./components/Signup"
 import ErrorPage from './components/ErrorPage';
 import EventsCreatePage from "./components/EventsCreatePage"
 import TotalEventCardShown from "./components/TotalEventCardShown"
+import ProfilePage from "./components/ProfilePage"
 
 export default function SetRoutes({auth, routesInfo, dataURL}){
-  ///Maybe use later
-    // let temp = routesInfo
-    // for(let i = 0; i < routesInfo?.length; i++){
-    //   temp[i].eventName = routesInfo[i]?.eventName.replace(/ /g, "%")
-    // }
+
 
   const eventsRoutes = routesInfo?.map((prevInfo) =>{
     return <Route key={prevInfo._id} path={`/events/${prevInfo._id}`} element={<TotalEventCardShown info={prevInfo}/>} />
@@ -28,6 +25,7 @@ export default function SetRoutes({auth, routesInfo, dataURL}){
           <Route path="/signup" element={<Signup auth={auth} dataURL={dataURL} />} />
           <Route path="/eventsCreatePage" element={<EventsCreatePage auth={auth} dataURL={dataURL}/>} />
           {eventsRoutes}
+          <Route path="/profile/:id" element={<ProfilePage auth={auth}/>} />
           {/* <Route path="/events/:id" element={<TotalEventCardShown data={this.state.data}/>} /> */}
           <Route path="*" element={<ErrorPage />} />
         </Routes>

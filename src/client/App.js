@@ -3,12 +3,12 @@ import Routes from "./SetRoutes.js"
 import {useEffect, useState} from "react"
 import axios from 'axios';
 import { initializeApp } from "firebase/app";
-import firebase from "firebase/auth"
 
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 
 function App() {
   const [eventCardInfo, setEventCardInfo] = useState()
+
   let dataURL
 
   ///Changes axios url for production or development
@@ -39,8 +39,11 @@ function App() {
     .catch(err => console.log(err))
   }, [])
 
+  if(!eventCardInfo) return null
+
   return (
     <div>
+      
       <Routes dataURL={dataURL} auth={auth} routesInfo={eventCardInfo} />
     </div>
 

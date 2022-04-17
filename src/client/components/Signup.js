@@ -3,9 +3,10 @@ import {useState} from "react"
 import "../styles/SignupPage.css"
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
-export default function Signup({auth, dataURL}){
+export default function Signup({showLogin, setShowLogin, auth, dataURL}){
     const [userInfo, setUserInfo] = useState({username:"", password:"", email:""})
     const [documentTitle, setDocumentTitle] = useState("Signup")
+
         
     function submitSignup(e){
         e.preventDefault()
@@ -41,7 +42,7 @@ export default function Signup({auth, dataURL}){
     }
 
     return(
-        <div className="centered">
+        <div onClick={() => setShowLogin(false)} className="centered">
             <Navbar dataURL={dataURL} documentTitle={documentTitle}/>
             <div className="signup-page">
                 <h1 className="signup-page-message">Welcome to Taekwondo Bulletin</h1>
