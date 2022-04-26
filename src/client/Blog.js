@@ -67,7 +67,7 @@ export default function Blog({dataURL}) {
         .then(res => setBlogPostState(res.data))
         .catch(res => console.log(res.message))
     }
-
+ 
 
     if(!blogPostState) return null
 
