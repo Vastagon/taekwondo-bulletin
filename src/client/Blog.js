@@ -68,8 +68,6 @@ export default function Blog({dataURL}) {
         .catch(res => console.log(res.message))
     }
 
-    console.log(blogPost)
-
 
     if(!blogPostState) return null
 
