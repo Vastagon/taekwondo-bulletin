@@ -13,7 +13,7 @@ function App() {
 
   ///Changes axios url for production or development
   if(process.env.NODE_ENV === "production"){
-    dataURL = "https://taekwondo-bulletin.herokuapp.com"
+    dataURL = process.env.REACT_APP_PRODUCTION_URL
   }else{
     dataURL = "http://localhost:5000"
   }   
@@ -28,9 +28,9 @@ function App() {
       measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
     };
 
+  ///firebase config and initialization
   const app = initializeApp(firebaseConfig)
   const auth = getAuth(app);
-  // connectAuthEmulator(auth, "http://localhost:9099")
   
 
   useEffect(() =>{
@@ -43,12 +43,9 @@ function App() {
 
   return (
     <div>
-      
       <Routes dataURL={dataURL} auth={auth} routesInfo={eventCardInfo} />
     </div>
 
   );
-
-
 }
 export default App;

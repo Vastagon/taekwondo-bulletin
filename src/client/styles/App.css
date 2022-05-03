@@ -209,6 +209,9 @@ html,body{
 .hide{
   display: none;
 }
+.homepage-about-text{
+  color: white;
+}
 
 
 /* Animations */
