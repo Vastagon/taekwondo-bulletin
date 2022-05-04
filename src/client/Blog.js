@@ -14,6 +14,8 @@ export default function Blog({dataURL}) {
     const [blogPostState, setBlogPostState] = useState()
     const abortCont = new AbortController()
     const [userState, setUserState] = useState()
+    const [replyShown, setReplyShown] = useState(false)
+
 
 
     useEffect(() => {
@@ -71,13 +73,12 @@ export default function Blog({dataURL}) {
 
     if(!blogPostState) return null
 
-
     return(
           <div className="blog">
               <Navbar dataURL={dataURL} documentTitle={documentTitle} />
 
               <div className="all-blog-posts">
-                {blogPostState.map(post => <BlogEntry postContent={post} key={post._id}/>)}
+                {blogPostState.map(post => <BlogEntry setReplyShown={setReplyShown} replyShown={replyShown} postContent={post} key={post._id}/>)}
               </div>
 
           
@@ -85,6 +86,8 @@ export default function Blog({dataURL}) {
                   <input minLength={5} required onChange={onChangeBlogPost} placeholder="Post a Message" id="blog-entry" type="text" className="blog-entry-input" />
                   <button type="submit" id="blog-entry-submit-button">Submit</button>
               </form>
+
+
 
           </div>
       )

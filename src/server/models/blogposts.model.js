@@ -3,9 +3,9 @@ const Schema = mongoose.Schema
 
 const BlogPostSchema = new Schema({
     postContent: {type: String},
-    postTitle: {type: String},
     postUserEmail: {type: String},
-    postUsername: {type: String}
+    postUsername: {type: String},
+    postReplies: {type: Array}
 }, {
     timestamps: true,
 })

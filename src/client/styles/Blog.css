@@ -49,7 +49,9 @@
 .blog{
     z-index: 0;
 }
-
+.reply-link:hover{
+    cursor: pointer;
+}
 
 @media screen and (max-width: 500px) {
     .all-blog-posts{
