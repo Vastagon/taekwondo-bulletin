@@ -29,7 +29,7 @@ html,body{
   top: 0;
   left: 0;
 }
-.logo:hover, .nav--right:hover > a,h4{
+.logo:hover, .nav--right:hover > a,h4,p{
   cursor: pointer;
 }
 .nav--right{
@@ -48,6 +48,7 @@ html,body{
   padding: 0;
   margin-right: 2rem;
 }
+
 .loggedin-email{
   font-size: 1rem;
 }
@@ -88,14 +89,14 @@ html,body{
   animation-duration: 1s;
   animation-iteration-count: 1;
 }
-.login-tab:hover::before{
+/* .login-tab:hover::before{
   right: 2rem;
   width: 5rem;
 }
 .blog-tab:hover::before{
   right: 16rem;
   width: 4rem;
-}
+} */
 .login-card{
   display: flex;
   flex-direction: column;

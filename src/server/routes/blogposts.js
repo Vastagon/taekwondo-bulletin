@@ -26,4 +26,23 @@ router.route('/add').post((req,res) =>{
     .catch(err => res.status(400).json(`Error: ${err}`))
 })
 
+
+router.route('/change').post((req,res) =>{
+    async function test1(){
+        const filter = {postContent: req.body.postContent}
+        const update = {postReplies: req.body.postReplies}
+
+        let doc = await BlogPost.findOneAndUpdate(filter, update)
+
+        
+        doc = await BlogPost.findOne(filter)
+
+    }
+    console.log(req.body)
+    test1()    
+})
+
+
+
+
 module.exports = router

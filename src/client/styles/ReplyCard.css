@@ -1,11 +1,11 @@
 .reply-card{
     width: 40%;
     margin-left: 30%;
-    height: 25vh;
+    height: auto;
     background-color: antiquewhite;
     color: black;
     border-radius: 10px;
-    position: absolute;
+    position: fixed;
     top: 30%;
     /* display: flex;
     align-items: center;
@@ -13,6 +13,7 @@
     z-index: 80; */
     border-color: black;
     border-style: solid;
+    padding-bottom: 1rem;
 }
 .inner-reply-card{
     margin-left: 10%;
@@ -21,8 +22,8 @@
 
 }
 .reply-input{
-    min-width: 80%;
+    /* min-width: 80%;
     max-width: 80%;
     min-height: 5rem;
-    max-height: 5rem;
+    max-height: 5rem; */
 }

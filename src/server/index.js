@@ -26,12 +26,15 @@ connection.once('open', () =>{///once connection is open
 const blogpostsRouter = require("./routes/blogposts")
 const eventsRouter = require('./routes/events')
 const imageRouter = require("./routes/image")
+const blogpostsChangeRouter = require("./routes/changeBlogposts")
 
 // app.use("/exercises", exercisesRouter)///
 app.use("/blogposts", blogpostsRouter)//when going to blogposts, it loads exercises router
 // app.use("/users", usersRouter)
 app.use("/eventsinfo", eventsRouter)
 app.use("/addimage", imageRouter)
+
+
 
 ///production build
 if (process.env.NODE_ENV === "production"){

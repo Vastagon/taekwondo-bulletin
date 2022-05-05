@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import "../styles/Blog.css"
 import ReplyCard from "./ReplyCard"
 
-export default function BlogEntry({postContent, replyShown, setReplyShown}){
+export default function BlogEntry({postContent, replyShown, setReplyShown, dataURL}){
     const [showReplyCard, setShowReplyCard] = useState(false)
 
     function newReply(){
@@ -29,7 +29,7 @@ export default function BlogEntry({postContent, replyShown, setReplyShown}){
             <p className="blog-content">{postContent.postContent}</p>
             <p className="reply-link" onClick={newReply}>Reply</p>
 
-            {showReplyCard ? <ReplyCard postContent={postContent}/> : null}
+            {showReplyCard ? <ReplyCard dataURL={dataURL} postContent={postContent}/> : null}
         </div>
     )    
     

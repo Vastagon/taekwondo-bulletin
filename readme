@@ -9,3 +9,5 @@ Start the firebase emulator for authentication
 
 
 PORT=3000 react-scripts start
+
+    "express": "^4.17.3",
