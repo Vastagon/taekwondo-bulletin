@@ -78,7 +78,7 @@ export default function Blog({dataURL}) {
               <Navbar dataURL={dataURL} documentTitle={documentTitle} />
 
               <div className="all-blog-posts">
-                {blogPostState.map(post => <BlogEntry dataURL={dataURL} setReplyShown={setReplyShown} replyShown={replyShown} postContent={post} key={post._id}/>)}
+                {blogPostState.map(post => <BlogEntry userState={userState} dataURL={dataURL} setReplyShown={setReplyShown} replyShown={replyShown} postContent={post} key={post._id}/>)}
               </div>
 
           

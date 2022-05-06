@@ -1,18 +1,25 @@
 import axios from "axios"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import "../styles/ReplyCard.css"
 
-export default function ReplyCard({postContent, dataURL}){
+export default function ReplyCard({userState, postContent, dataURL}){
     const [replyText, setReplyText] = useState()
+    ///Name is anonymous if not logged in
+    let displayName = "Anonymous"
+    if(userState?.displayName !== undefined){
+        displayName = userState.displayName
+    }
 
     function onReplyChange(e){
         setReplyText(e.target.value)
     }
-
+    ///on Submit
     function submitReply(e){
         e.preventDefault()
-        postContent.postReplies.push(replyText)
-        axios.post(`${dataURL}/blogposts/change`, {postReplies: postContent.postReplies, postContent:postContent.postContent, postUsername:postContent.postUsername})
+        ///Pushes new reply, then posts data to change where the backend handles the data
+        postContent.postReplies.push({postRepliesContent: replyText, postRepliesUser: displayName})
+        // axios.post(`${dataURL}/blogposts/change`, {postReplies: postContent.postReplies, postContent:postContent.postContent, postUsername:postContent.postUsername})
+        axios.post(`${dataURL}/blogposts/change`, {postReplies: postContent.postReplies, postContent:postContent.postContent, originalPoster: postContent.postUsername || "Anonymous"})
 
         setReplyText("")
         document.getElementById("reply-text").value = ""

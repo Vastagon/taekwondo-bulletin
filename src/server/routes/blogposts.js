@@ -7,12 +7,15 @@ router.route('/').get((req,res) =>{
     .catch(err => res.status(400).json(`Error: ${err}`))
 })
 
-
+///Runs when adding a blog post
 router.route('/add').post((req,res) =>{
     const postContent = req.body.postContent
     const postReplies = []
     const postUserEmail = req.body.postUserEmail
-    const postUsername = req.body.postUsername
+    let postUsername = req.body.postUsername
+    if(postUsername === ""){
+        postUsername="Anonymous"
+    }
 
     const newBlogpost = new BlogPost({
         postContent,
@@ -26,19 +29,20 @@ router.route('/add').post((req,res) =>{
     .catch(err => res.status(400).json(`Error: ${err}`))
 })
 
-
+///Runs when adding a reply
 router.route('/change').post((req,res) =>{
     async function test1(){
-        const filter = {postContent: req.body.postContent}
-        const update = {postReplies: req.body.postReplies}
+        console.log(req.body.originalPoster)
+        const filter = {postContent: req.body.postContent, postUsername: req.body.originalPoster}
+        const update = {postReplies: req.body.postReplies, postUsername: req.body.postUsername}
 
+        ///Updates replies
         let doc = await BlogPost.findOneAndUpdate(filter, update)
-
         
-        doc = await BlogPost.findOne(filter)
+        // doc = await BlogPost.findOne(filter)
 
     }
-    console.log(req.body)
+
     test1()    
 })
 
