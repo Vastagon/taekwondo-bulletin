@@ -43,7 +43,7 @@ export default function BlogEntry({postContent, replyShown, setReplyShown, dataU
 
     return(
         <div className="blog-entry">
-            {postContent.postUserEmail ? <p className="blog-username">{postContent.postUsername ? postContent.postUsername : postContent.postUserEmail}</p> : <p className="blog-username">Anonymous</p>}
+            {postContent.postUserEmail ? <p className="blog-username"><b>{postContent.postUsername ? postContent.postUsername : postContent.postUserEmail}</b></p> : <p className="blog-username"><b>Anonymous</b></p>}
             <p className="blog-content">{postContent.postContent}</p>
             <div className="reply-text-line">
                 <p className="reply-link" onClick={newReply}>Reply</p>

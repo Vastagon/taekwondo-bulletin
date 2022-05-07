@@ -1,14 +1,20 @@
 import Navbar from "./Navbar"
 import "../styles/ProfilePage.css"
 import { useState } from "react"
-import { updateProfile, signOut } from "firebase/auth"
+import { updateProfile, signOut, sendEmailVerification } from "firebase/auth"
 import { useNavigate } from "react-router-dom"
 
 export default function ProfilePage({auth}){
     const [showInput, setShowInput] = useState(false)
     const [changeUsernameInput, setChangeUsernameInput] = useState("")
     let navigate = useNavigate()
-
+///https://taekwondo-bulletin.herokuapp.com/
+    const actionCodeSettings = {
+        url: 'https://taekwondo-bulletin.herokuapp.com/',
+        handleCodeInApp: true,
+ 
+    };
+    console.log(auth)
     function changeUsername(){
         setShowInput(true)
     }
@@ -30,6 +36,12 @@ export default function ProfilePage({auth}){
         window.location.reload()    
     }
 
+    function sendVerificationEmail(){
+        sendEmailVerification(auth.currentUser)
+        .then(alert("Verification Email Sent"))
+
+    }
+
     return (
         <div className="profile-page">
             <Navbar />
@@ -44,6 +56,8 @@ export default function ProfilePage({auth}){
                 </form> : null}
 
                 <button onClick={handleSignOut}>Sign Out</button>
+
+                <button onClick={sendVerificationEmail}>Send Verification Email</button>
             </div>
 
         </div>

@@ -1,13 +1,15 @@
 import Navbar from "./Navbar"
 import {useState} from "react"
 import "../styles/SignupPage.css"
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile, sendSignInLinkToEmail } from "firebase/auth";
 
 export default function Signup({showLogin, setShowLogin, auth, dataURL}){
     const [userInfo, setUserInfo] = useState({username:"", password:"", email:""})
     const [documentTitle, setDocumentTitle] = useState("Signup")
 
-        
+
+
+    console.log(userInfo.email)
     function submitSignup(e){
         e.preventDefault()
         ///checks if both password inputs match
@@ -17,12 +19,14 @@ export default function Signup({showLogin, setShowLogin, auth, dataURL}){
 
             ///Creates a new account with firebase function
             createUserWithEmailAndPassword(auth, userInfo.email, userInfo.password)
-            .then(result =>{
+            .then(() =>{
                 ///Gives profile a username
                 updateProfile(auth.currentUser, {
                     displayName: userInfo.username
                 })
-                window.location.reload()
+
+                sendEmailVerification(auth.currentUser)
+                .then(alert("Verification Email Sent"))
             })
         
             ///Handles errors
