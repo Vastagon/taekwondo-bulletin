@@ -8,7 +8,7 @@ export default function ProfilePage({auth}){
     const [showInput, setShowInput] = useState(false)
     const [changeUsernameInput, setChangeUsernameInput] = useState("")
     let navigate = useNavigate()
-///https://taekwondo-bulletin.herokuapp.com/
+
     const actionCodeSettings = {
         url: 'https://taekwondo-bulletin.herokuapp.com/',
         handleCodeInApp: true,
