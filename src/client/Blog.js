@@ -69,8 +69,8 @@ export default function Blog({dataURL}) {
         .then(res => setBlogPostState(res.data))
         .catch(res => console.log(res.message))
     }
- 
-
+  
+  
     if(!blogPostState) return null
 
     return(
@@ -86,9 +86,6 @@ export default function Blog({dataURL}) {
                   <input minLength={5} required onChange={onChangeBlogPost} placeholder="Post a Message" id="blog-entry" type="text" className="blog-entry-input" />
                   <button type="submit" id="blog-entry-submit-button">Submit</button>
               </form>
-
-
-
           </div>
       )
     }

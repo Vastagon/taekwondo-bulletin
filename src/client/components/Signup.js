@@ -1,7 +1,7 @@
 import Navbar from "./Navbar"
 import {useState} from "react"
 import "../styles/SignupPage.css"
-import { createUserWithEmailAndPassword, updateProfile, sendSignInLinkToEmail } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile, sendEmailVerification } from "firebase/auth";
 
 export default function Signup({showLogin, setShowLogin, auth, dataURL}){
     const [userInfo, setUserInfo] = useState({username:"", password:"", email:""})

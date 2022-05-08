@@ -39,8 +39,6 @@ router.route('/change').post((req,res) =>{
         ///Updates replies
         let doc = await BlogPost.findOneAndUpdate(filter, update)
         
-        // doc = await BlogPost.findOne(filter)
-
     }
 
     test1()    

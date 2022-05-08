@@ -5,30 +5,39 @@ import {v4 as uuid} from "uuid"
 
 export default function BlogEntry({postContent, replyShown, setReplyShown, dataURL, userState}){
     const [showReplyCard, setShowReplyCard] = useState(false)
-    const [showReplies, setShowReplies] = useState(false)
+    const [showRepliesBoolean, setShowRepliesBoolean] = useState(false)
     const [allReplies, setAllReplies] = useState()
+    ///State that changes whenever a reply is submitted
+    const [update, setUpdate] = useState(false)
+    
 
+    // function newReply(){
+    //     if(replyShown){
+    //         if(showReplyCard){
+    //             setShowReplyCard(false)
+    //         }
+    //     }else{
+    //         setShowReplyCard(prev => !prev)
+    //         setReplyShown(true)
+    //     }
+    // }
 
     function newReply(){
-        if(replyShown){
-            if(showReplyCard){
-                setShowReplyCard(false)
-            }
-        }else{
-            setShowReplyCard(prev => !prev)
-            setReplyShown(true)
-        }
-    }
-    function showRepliesFunction(){
-        setShowReplies(prev => !prev)
+        setShowReplyCard(true)
+        setShowRepliesBoolean(true)        
     }
 
-    useEffect(() =>{
-        if(!showReplyCard){
-            setReplyShown(false)
-        }
-    }, [showReplyCard])
-    console.log(postContent)
+
+    function showRepliesBooleanFunction(){
+        setShowRepliesBoolean(prev => !prev)
+    }
+
+    // useEffect(() =>{
+    //     if(!showReplyCard){
+    //         setReplyShown(false)
+    //     }
+    // }, [showReplyCard])
+
     useEffect(() =>{
         setAllReplies(postContent.postReplies.map(prev =>{
             return (
@@ -38,8 +47,7 @@ export default function BlogEntry({postContent, replyShown, setReplyShown, dataU
                 </div>
             )
         }))
-    }, [showReplies])
-
+    }, [showRepliesBoolean, update])
 
     return(
         <div className="blog-entry">
@@ -47,12 +55,12 @@ export default function BlogEntry({postContent, replyShown, setReplyShown, dataU
             <p className="blog-content">{postContent.postContent}</p>
             <div className="reply-text-line">
                 <p className="reply-link" onClick={newReply}>Reply</p>
-                <p className="show-replies" onClick={showRepliesFunction}>Show replies</p>
+                <p className="show-replies" onClick={showRepliesBooleanFunction}>Show replies</p>
 
             </div>
 
             {
-            showReplies ? 
+            showRepliesBoolean ? 
             <div className="replies">
                 {allReplies}
             </div>
@@ -60,7 +68,7 @@ export default function BlogEntry({postContent, replyShown, setReplyShown, dataU
             null
             }
 
-            {showReplyCard ? <ReplyCard userState={userState} key={uuid()} dataURL={dataURL} postContent={postContent}/> : null}
+            {showReplyCard ? <ReplyCard showReplyCard={showReplyCard} setShowReplyCard={setShowReplyCard} setUpdate={setUpdate} setShowRepliesBoolean={setShowRepliesBoolean} userState={userState} key={uuid()} dataURL={dataURL} postContent={postContent}/> : null}
         </div>
     )    
     
