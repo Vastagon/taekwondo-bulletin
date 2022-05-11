@@ -4,7 +4,9 @@ I'm a competitive Taekwondo Fighter with a love of organization and learning. Un
 **Link to project:** https://taekwondo-bulletin.herokuapp.com/
 
 ![alt tag](https://github.com/Vastagon/taekwondo-bulletin/blob/main/public/tkd.png)
-
+![alt tag](https://github.com/Vastagon/taekwondo-bulletin/blob/main/public/tkd2.png)
+![alt tag](https://github.com/Vastagon/taekwondo-bulletin/blob/main/public/tkd3.png)
+![alt tag](https://github.com/Vastagon/taekwondo-bulletin/blob/main/public/tkd4.png)
 
 ## How It's Made:
 
