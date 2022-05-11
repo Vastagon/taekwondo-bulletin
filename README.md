@@ -24,7 +24,7 @@ This was created using React for the frontend and Node for the backend. I used n
 
 I learned a lot with this project. I learned how to post data to a route, my understanding of POST and GET requests has deepened immensely. I learned how to connect to mongoDB, read and write information on mongoDB, and how to effectively display that on the page. I got good practice with ternary operators and conditional rendering in React. My understanding of how states work and how React uses the virtual DOM to rerender the page, as well as the order of operations that take place each time the page rerenders. I accomplished things that I wasn't sure I could do, and now that those are done I'm able to set my sights even higher while trying to become a better developer.
 
-### Local Use
+### `Local Use`
 
 # `Install packages`
 Install the packages using npm install before trying to run the program
