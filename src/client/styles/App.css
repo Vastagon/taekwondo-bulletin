@@ -1,5 +1,7 @@
+
 * {
   box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
 }
 html,body{
   width: 100%;
@@ -29,7 +31,7 @@ html,body{
   top: 0;
   left: 0;
 }
-.logo:hover, .nav--right:hover > a,h4,p{
+.logo:hover, .nav--right:hover > a,h4{
   cursor: pointer;
 }
 .nav--right{
@@ -47,6 +49,9 @@ html,body{
   font-weight: 400;
   padding: 0;
   margin-right: 2rem;
+}
+.nav-tabs:hover{
+  cursor: pointer;
 }
 
 .loggedin-email{

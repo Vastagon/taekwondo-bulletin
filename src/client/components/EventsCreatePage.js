@@ -19,6 +19,7 @@ export default function EventsCreatePage({dataURL, auth}){
     const [droppedImage, setDroppedImage] = useState(false)
     const [testImage, setTestImage] = useState({image: ""})
     const [documentTitle, setDocumentTitle] = useState("Create New Event")
+    const [emailVerified, setEmailVerified] = useState(true)
 
     ///formData for the cloudinary upload
     formData.append("api_key", process.env.REACT_APP_CLOUDINARY_API_KEY)
@@ -100,11 +101,26 @@ export default function EventsCreatePage({dataURL, auth}){
         }))
     }
 
+    ///On page load, checks if email is verified
+    useEffect(() =>{
+        if(!auth?.currentUser?.emailVerified){
+            setEmailVerified(false) 
+            alert("Only verified emails can post an event, please verify your email before attempting to post an event.")
+        }
+        console.log(emailVerified)
+    }, [])
+
+    ///Function called when email is not verified and user tries to submit Event
+    function emailNotVerifiedFunction(e){
+        e.preventDefault()
+        alert("Only verified emails can post an event, please verify your email before attempting to post an event.")
+    }
+
     return(
         <div>
             <Navbar dataURL={dataURL} auth={auth} documentTitle={documentTitle} />
             {/* Event Info */}
-            <form autoComplete="off" onSubmit={createEventFormSubmit} className="create-events-form">
+            <form autoComplete="off" onSubmit={emailVerified ? createEventFormSubmit : emailNotVerifiedFunction} className="create-events-form">
                 <div className="create-events-input">
                     <label className="form-label-input" htmlFor="eventName">Event Name</label>
                     <input required onChange={handleEventsFormChange} id="eventName" name="eventName" className="create-events-input" type="text" placeholder="Title"></input>
@@ -117,7 +133,6 @@ export default function EventsCreatePage({dataURL, auth}){
                     <label  className="form-label-input" htmlFor="eventOrganizer">Event Organizer</label>
                     <input id="eventOrganiser" required onChange={handleEventsFormChange} name="eventOrganizer" className="create-events-input" type="text" placeholder="Organizer" />
                 </div>
-
 
 
 
@@ -190,7 +205,8 @@ export default function EventsCreatePage({dataURL, auth}){
                     <div className="img-drop">
                         <div {...getRootProps()}>
                             <input id="dropbox-image" {...getInputProps()} />
-                            {droppedImage ? <img className="image-preview" src={testImage.image}></img> 
+                            {
+                            droppedImage ? <img className="image-preview" src={testImage.image}></img> 
                             :
                             <svg id="img-drop-icon" className="img-drop-icon" xmlns="http://www.w3.org/2000/svg" width="50" height="43" viewBox="0 0 50 43">
                             <path d="M48.4 26.5c-.9 0-1.7.7-1.7 
@@ -207,8 +223,7 @@ export default function EventsCreatePage({dataURL, auth}){
                     <button className="events-form-submit" type="submit">Submit Event</button>
                 </div>
             </form>      
-            <div>    
-            </div>
+           
         </div>
     )
 }

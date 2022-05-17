@@ -61,7 +61,7 @@
     margin-top: 0;
 }
 .show-replies{
-    width: 5.5rem;
+    width: 6rem;
 }
 .reply-text-line{
     display: flex;
@@ -80,6 +80,9 @@
 }
 .reply-content{
     margin-top: 0;
+}
+.reply-content:hover, .reply-username:hover{
+    cursor: initial;
 }
 
 @media screen and (max-width: 500px) {

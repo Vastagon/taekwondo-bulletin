@@ -2,8 +2,12 @@
     color: white;
     text-align: center;
     margin-top: 10%;
+    padding-left: 10%;
+    padding-right: 10%;
 }
-
+.total-event-card-shown:hover{
+    cursor: initial;
+}
 
 @media screen and (max-width: 500px) {
     .total-event-card-shown{

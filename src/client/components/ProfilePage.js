@@ -9,15 +9,11 @@ export default function ProfilePage({auth}){
     const [changeUsernameInput, setChangeUsernameInput] = useState("")
     let navigate = useNavigate()
 
-    const actionCodeSettings = {
-        url: 'https://taekwondo-bulletin.herokuapp.com/',
-        handleCodeInApp: true,
- 
-    };
-    console.log(auth)
+    console.log(auth?.currentUser.emailVerified)
     function changeUsername(){
         setShowInput(true)
     }
+    ///On form submit for username change
     function handleChangeUsername(e){
         e.preventDefault()
 
@@ -25,21 +21,21 @@ export default function ProfilePage({auth}){
             displayName: changeUsernameInput
         })
         setShowInput(false)
-        
     }
+    ///Handle username text input
     function handleInput(e){
         setChangeUsernameInput(e.target.value)
     }
+    ///Sign user out
     function handleSignOut(){
         signOut(auth)
         navigate("/")
         window.location.reload()    
     }
-
+    ///Send new Verification Email
     function sendVerificationEmail(){
         sendEmailVerification(auth.currentUser)
         .then(alert("Verification Email Sent"))
-
     }
 
     return (
@@ -48,6 +44,7 @@ export default function ProfilePage({auth}){
 
             <div className="profile-info">
                 <p>Email: {auth?.currentUser.email}</p>
+                {auth?.currentUser.emailVerified ? <p>Email is Verified</p> : <p>Email is Not Verified</p>}
                 {auth?.currentUser.displayName ? <p>Username: {auth?.currentUser.displayName}</p> : <p>No Username</p>}
                 <button onClick={changeUsername}>Change Username</button>
 
